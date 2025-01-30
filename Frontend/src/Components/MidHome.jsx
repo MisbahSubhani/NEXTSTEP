@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "./Button";
 import { FooterSection } from "./FooterSection";
-import { RatingWithComment } from "./Ratingcom";
+// import { RatingWithComment } from "./Ratingcom";
 export function MidHome() {
   return (
     <div className="flex flex-col  bg-stone-950 "
@@ -81,7 +81,7 @@ export function MidHome() {
             </div>
           </section>
         </div>
-        <RatingWithComment/>
+        {/* <RatingWithComment/> */}
       </div>
 
       {/* Footer Section */}

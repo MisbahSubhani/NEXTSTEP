@@ -21,7 +21,7 @@ const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
          <div
-              className="relative w-full mt-0 object-cover"
+              className="relative w-full mt-0 object-cover  border-b-2 border-white"
               style={{
                 backgroundImage: "url('/img/hero-2.png')", // Background
                 backgroundSize: "cover",
