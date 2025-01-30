@@ -1,5 +1,6 @@
 import { FooterSection } from "../Components/FooterSection"
-import { NavbarMain } from "../Components/NavbarMain"
+
+import { Navbarnew } from "../Components/Navbarnew"
 
 
 
@@ -7,16 +8,23 @@ export function Contact() {
 
 
     return (
-         <div className="">
-         <div  className=" hidden : md:block  border-b-2 border-black">
-          <NavbarMain/>
+         <div className="" style={{
+          backgroundImage: "url('/img/hero-2.png')", // Use the relative path
+          backgroundSize: "cover", // Ensure background covers entire div
+          backgroundPosition: "center", // Center the background image
+          paddingTop: 0, // Ensure no padding on top
+          marginTop: 0, // Ensure no margin on top
+        }}>
+         <div  className="  : md:block  border-b border-white ">
+          <Navbarnew/>
           </div>
           
-          <div class=" bg-white max-h-screen-full    md:bg-stone-800  pt-6 pb-6  ">
-          <div  className="">
-      <div class="rounded-xl grid  md:grid-cols-2 items-start gap-12 p-8 mx-auto max-w-4xl bg-zinc-100 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-semi font-[sans-serif] ">
+          <div class=" bg-white max-h-screen-full   md:bg-stone-800  pt-4 pb-6  "
+        >
+          <div  >
+      <div class="rounded-xl grid  md:mt-4 grid-cols-2 items-start gap-12 p-8 mx-auto max-w-4xl bg-zinc-100 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-semi font-[sans-serif] ">
         <div>
-          <h1 class="px-4 font-mono underline text-gray-800 text-3xl font-bold  text-center">Let's Talk</h1>
+          <h1 class=" px-4 font-mono underline text-gray-800 text-3xl font-bold  text-center">Let's Talk</h1>
           <p class="font-mono text-md text-cyan-800  font-semibold mt-4">Have some big idea or brand to develop and need help? Then reach out we'd love to hear about your project  and provide help.</p>
 
           <div class="mt-12">
