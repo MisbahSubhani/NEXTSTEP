@@ -3,3 +3,91 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "flowbite";
+@import url("https://fonts.cdnfonts.com/css/general-sans");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: #dfdff0;
+  font-family: "General Sans", sans-serif;
+  margin: 0;  /* Reset margin */
+}
+
+@layer base {
+  @font-face {
+    font-family: "circular-web";
+    src: url("/fonts/circularweb-book.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "general";
+    src: url("/fonts/general.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "robert-medium";
+    src: url("/fonts/robert-medium.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "robert-regular";
+    src: url("/fonts/robert-regular.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "zentry";
+    src: url("/fonts/zentry-regular.woff2") format("woff2");
+  }
+}
+.hero-image-container {
+  position: relative; /* To ensure overlay stays on top */
+  overflow: hidden; /* Clip the animation within the image container */
+}
+
+/* Wind-blowing effect for the last image */
+./* Wind effect container */
+.wind-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Matches the width of the image */
+  height: 100%; /* Matches the height of the image */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Individual streaks */
+.wind-streak {
+  position: absolute;
+  width: 2px; /* Thin vertical lines */
+  height: 3px; /* Variable heights for the streaks */
+  background: rgba(255, 255, 255, 0.7); /* Semi-transparent white streaks */
+  animation: wind-blow-fall 1.5s linear infinite;
+}
+
+/* Animation for falling wind effect */
+@keyframes wind-blow-fall {
+  0% {
+    transform: translateY(-20px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200px); /* Moves the streaks downward */
+    opacity: 0; /* Fade out */
+  }
+}
+
+
+
