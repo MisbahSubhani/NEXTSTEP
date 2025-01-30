@@ -2,8 +2,9 @@ import { Typography, Avatar, Rating } from "@material-tailwind/react";
  
 export function RatingWithComment() {
   return (
-    <div  className="flex flex-col  bg-zinc-100 w-full flex flex-row justify-between pt-4  ">
-    <div className="px-8 text-center border-t-2">
+    <div  className="flex flex-row  bg-zinc-100 w-full flex flex-row justify-between pt-4  "
+     >
+    <div className="px-8 text-center border-t-2"  >
    
       <Avatar
         src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
