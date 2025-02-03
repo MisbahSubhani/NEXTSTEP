@@ -42,7 +42,7 @@ export function RatingWithComment() {
      size="md"   className="rounded-full"
    />
    <Typography variant="h6" className="mt-4  text-white" >
-     Aahna Singh
+      Aahna Panday
    </Typography>
    <Typography color="gray" className="mb-4 font-normal text-zinc-100">
     Intern at Apple
