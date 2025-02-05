@@ -21,14 +21,14 @@ const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
          <div
-              className="relative w-full mt-0 object-cover  border-b-2 border-white"
-              style={{
-                backgroundImage: "url('/img/hero-2.png')", // Background
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                paddingTop: 0,
-                marginTop: 0,
-              }}
+              className="bg-gradient-to-r from-[#020024] via-[#020024] to-[#386060] relative w-full mt-0 object-cover  border-b-2 border-white"
+              // style={{
+              //   backgroundImage: "url('/img/hero-2.png')", // Background
+              //   backgroundSize: "cover",
+              //   backgroundPosition: "center",
+              //   paddingTop: 0,
+              //   marginTop: 0,
+              // }}
             >
               
         
@@ -42,13 +42,14 @@ const [isSidebarOpen, setIsSidebarOpen] = useState(false);
                   className="object-contain shrink-0 rounded-3xl aspect-[0.85] w-[60px] "
                 /> */}
                  <div className="ml-auto flex space-x-4 hidden md:flex pr-4 mt-4">
-          <Button href="/about" color="dark" pill>
-            About Us
-          </Button>
-          <Button href="/contact" color="dark" pill>
+                 <Button className="bg-stone-950 hover:bg-blue-600" href="/about" color="dark" pill>
+  About Us
+</Button>
+
+          <Button className="bg-stone-950 hover:bg-blue-600" href="/contact" color="dark" pill>
             Contact Us
           </Button>
-          <Button href="/signup" color="dark" pill>
+          <Button className="bg-stone-950 hover:bg-blue-600"  href="/signup" color="dark" pill>
             SignUp
           </Button>
         </div>
