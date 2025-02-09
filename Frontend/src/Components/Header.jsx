@@ -19,7 +19,7 @@ export function Header() {
       }}
     >
       
-    <Navbarnew/>  
+    <Navbarnew />  
      
 
 

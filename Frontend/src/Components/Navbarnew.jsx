@@ -7,6 +7,7 @@ export function Navbarnew() {
 const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const navItems = [
+    { text: "Home", href: "/" },
     { text: "About Us", href: "/about" },
     { text: "Contact Us", href: "/contact" },
     { text: "SignUp", href: "/signup" }
@@ -21,7 +22,7 @@ const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
          <div
-              className="bg-gradient-to-r from-[#020024] via-[#020024] to-[#386060] relative w-full mt-0 object-cover  border-b-2 border-white"
+              className="bg-gradient-to-t from-[#22C1C3] to-[#000000] border-b-2 "
               // style={{
               //   backgroundImage: "url('/img/hero-2.png')", // Background
               //   backgroundSize: "cover",
@@ -42,6 +43,9 @@ const [isSidebarOpen, setIsSidebarOpen] = useState(false);
                   className="object-contain shrink-0 rounded-3xl aspect-[0.85] w-[60px] "
                 /> */}
                  <div className="ml-auto flex space-x-4 hidden md:flex pr-4 mt-4">
+                 <Button className="bg-stone-950 hover:bg-blue-600" href="/" color="dark" pill>
+  Home
+</Button>
                  <Button className="bg-stone-950 hover:bg-blue-600" href="/about" color="dark" pill>
   About Us
 </Button>

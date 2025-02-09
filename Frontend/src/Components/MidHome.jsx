@@ -4,20 +4,21 @@ import { FooterSection } from "./FooterSection";
 // import { RatingWithComment } from "./Ratingcom";
 export function MidHome() {
   return (
-    <div className="flex flex-col  bg-stone-950 "
-    style={{
-      backgroundImage: "url('/img/hero-2.png')", // Use the relative path
-      backgroundSize: "cover", // Ensure background covers entire div
-      backgroundPosition: "center", // Center the background image
-      paddingTop: 0, // Ensure no padding on top
-      marginTop: 0, // Ensure no margin on top
-    }}>
-      {/* Content Section */}
+    <div className="flex flex-col  bg-stone-950 bg-gradient-to-r from-[#020024] via-[#386060] to-[#386060]"  >
+    {/* // style={{
+    //   backgroundImage: "url('/img/hero-2.png')", // Use the relative path
+    //   backgroundSize: "cover", // Ensure background covers entire div
+    //   backgroundPosition: "center", // Center the background image
+    //   paddingTop: 0, // Ensure no padding on top
+    //   marginTop: 0, // Ensure no margin on top
+    // }} */}
+   
       <div className="flex-grow py-16">
         <div className="container mx-auto px-4">
           {/* Search Section */}
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-center mb-6 text-white">
+            <h2 className="text-3xl font-bold text-center mb-6 text-white underline"
+            style={{ fontFamily: 'Times New Roman' }}>
               Explore Top Jobs & Internships
             </h2>
             {/* Add search input or other elements here if needed */}

@@ -2,12 +2,14 @@ import { FooterSection } from "../Components/FooterSection"
 
 import { Navbarnew } from "../Components/Navbarnew"
 
+import Githublogo from "../assets/Github.png";
 
 
 export function Contact() {
 
 
     return (
+ 
          <div className="" style={{
           backgroundImage: "url('/img/hero-2.png')", // Use the relative path
           backgroundSize: "cover", // Ensure background covers entire div
@@ -19,13 +21,13 @@ export function Contact() {
           <Navbarnew/>
           </div>
           
-          <div class=" bg-white max-h-screen-full   md:bg-stone-800  pt-4 pb-6  "
+          <div class=" bg-white max-h-screen-full   md:bg-stone-800  pt-4 pb-6 bg-gradient-to-r from-[#020024] via-[#386060] to-[#386060] "
         >
           <div  >
       <div class="rounded-xl grid  md:mt-4 grid-cols-2 items-start gap-12 p-8 mx-auto max-w-4xl bg-zinc-100 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-semi font-[sans-serif] ">
         <div>
           <h1 class=" px-4 font-mono underline text-gray-800 text-3xl font-bold  text-center">Let's Talk</h1>
-          <p class="font-mono text-md text-cyan-800  font-semibold mt-4">Have some big idea or brand to develop and need help? Then reach out we'd love to hear about your project  and provide help.</p>
+          <p class="font-mono text-md text-black  font-semibold mt-4">"We’d love to hear from you! Whether you have questions, feedback, or need assistance, feel free to reach out. Our team is here to help!"</p>
 
           <div class="mt-12">
             <h2 class="text-gray-800 text-base font-bold">Email</h2>
@@ -41,7 +43,7 @@ export function Contact() {
                 </div>
                 <a href="javascript:void(0)" class="text-[#007bff] text-sm ml-4">
                   <small class="block  text-black font-bold">Mail</small>
-                  <strong  className="text-cyan-800">info@example.com</strong>
+                  <strong  className="font-Cambria text-black">NextStep@example.com</strong>
                 </a>
               </li>
             </ul>
@@ -51,21 +53,16 @@ export function Contact() {
             <h2 class="text-gray-800 text-base font-bold">Socials</h2>
 
             <ul class="flex mt-4 space-x-4">
+            
+            <a href="https://github.com/MisbahSubhani/" target="_blank" rel="noopener noreferrer">
+  <button className="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
+          <img src={Githublogo }/>  </button>
+</a>
+
+            
               <li class="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
                 <a href="javascript:void(0)">
-                <svg className="w-8" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">
-<path d="M 5.9199219 6 L 20.582031 27.375 L 6.2304688 44 L 9.4101562 44 L 21.986328 29.421875 L 31.986328 44 L 44 44 L 28.681641 21.669922 L 42.199219 6 L 39.029297 6 L 27.275391 19.617188 L 17.933594 6 L 5.9199219 6 z M 9.7167969 8 L 16.880859 8 L 40.203125 42 L 33.039062 42 L 9.7167969 8 z"></path>
-</svg>
-                </a>
-              </li>
-              <li class="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
-                <a href="javascript:void(0)">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill='#007bff'
-                    viewBox="0 0 511 512">
-                    <path
-                      d="M111.898 160.664H15.5c-8.285 0-15 6.719-15 15V497c0 8.285 6.715 15 15 15h96.398c8.286 0 15-6.715 15-15V175.664c0-8.281-6.714-15-15-15zM96.898 482H30.5V190.664h66.398zM63.703 0C28.852 0 .5 28.352.5 63.195c0 34.852 28.352 63.2 63.203 63.2 34.848 0 63.195-28.352 63.195-63.2C126.898 28.352 98.551 0 63.703 0zm0 96.395c-18.308 0-33.203-14.891-33.203-33.2C30.5 44.891 45.395 30 63.703 30c18.305 0 33.195 14.89 33.195 33.195 0 18.309-14.89 33.2-33.195 33.2zm289.207 62.148c-22.8 0-45.273 5.496-65.398 15.777-.684-7.652-7.11-13.656-14.942-13.656h-96.406c-8.281 0-15 6.719-15 15V497c0 8.285 6.719 15 15 15h96.406c8.285 0 15-6.715 15-15V320.266c0-22.735 18.5-41.23 41.235-41.23 22.734 0 41.226 18.495 41.226 41.23V497c0 8.285 6.719 15 15 15h96.403c8.285 0 15-6.715 15-15V302.066c0-79.14-64.383-143.523-143.524-143.523zM466.434 482h-66.399V320.266c0-39.278-31.953-71.23-71.226-71.23-39.282 0-71.239 31.952-71.239 71.23V482h-66.402V190.664h66.402v11.082c0 5.77 3.309 11.027 8.512 13.524a15.01 15.01 0 0 0 15.875-1.82c20.313-16.294 44.852-24.907 70.953-24.907 62.598 0 113.524 50.926 113.524 113.523zm0 0"
-                      data-original="#000000" />
-                  </svg>
+                
                 </a>
               </li>
               <li class="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
@@ -108,7 +105,8 @@ export function Contact() {
 
      
       </div>
-      
+    
         </div>
+     
     )
 }
