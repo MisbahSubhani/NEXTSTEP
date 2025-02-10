@@ -17,7 +17,7 @@ export function Contact() {
           paddingTop: 0, // Ensure no padding on top
           marginTop: 0, // Ensure no margin on top
         }}>
-         <div  className="  : md:block  border-b border-white ">
+         <div  className="  : md:block   ">
           <Navbarnew/>
           </div>
           

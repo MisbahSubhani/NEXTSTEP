@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import res from './Opp.json';
-
+import { Navbarnew } from '../Components/Navbarnew';
+import { FooterSection } from '../Components/FooterSection';
 export function InternshipPage() {
   const [internships, setInternships] = useState([]);
   const [disabledButtons, setDisabledButtons] = useState([]);
@@ -39,14 +40,12 @@ export function InternshipPage() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen">
-      <header className="bg-blue-600 text-white p-4 shadow-md">
-        <h1 className="text-2xl font-bold text-center">Internship Portal</h1>
-      </header>
+    <div className="bg-gradient-to-r from-[#020024] via-[#386060] to-[#386060] min-h-screen">
+     <Navbarnew />
 
       <main className="py-10 px-4">
         <section className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+          <h2 className="text-3xl font-bold text-white mb-6 text-center">
             Available Internships
           </h2>
 
@@ -109,11 +108,7 @@ export function InternshipPage() {
         </section>
       </main>
 
-      <footer className="bg-blue-600 text-white py-4 mt-10">
-        <p className="text-center text-sm">
-          &copy; 2024 Internship Portal. All rights reserved.
-        </p>
-      </footer>
+     <FooterSection/>
     </div>
   );
 }

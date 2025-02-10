@@ -2,7 +2,8 @@
 import React from "react";
 import { useState } from "react";
 import { Button } from "flowbite-react";
-
+import Logo from "../assets/FinalLogo.png"
+import { Link } from "react-router-dom";
 export function Navbarnew() {
 const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -22,7 +23,7 @@ const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
          <div
-              className="bg-gradient-to-t from-[#22C1C3] to-[#000000] border-b-2 "
+              className="bg-gradient-to-r from-[#1c1a3b] to-[#379090] "
               // style={{
               //   backgroundImage: "url('/img/hero-2.png')", // Background
               //   backgroundSize: "cover",
@@ -34,28 +35,24 @@ const [isSidebarOpen, setIsSidebarOpen] = useState(false);
               
         
               {/* Navigation items and logo */}
-              <div className="flex justify-between items-center text-xs font-extrabold text-white px-5 pt-1 pb-4">
+            
+              <div className="flex justify-between items-center text-sm font-extrabold text-white px-5 pt-1 pb-4">
                 {/* Logo */}
-                {/* <img
-                  loading="lazy"
-                  src="https://cdn.builder.io/api/v1/image/assets/d6a4942175374e7baf2a6d7a60f38356/9e4c92cc924b7f3833c502e606bf80cbd1ba42e2ad5f2321efc06f9a47e95686?apiKey=d6a4942175374e7baf2a6d7a60f38356&"
-                  alt="NextStep Logo"
-                  className="object-contain shrink-0 rounded-3xl aspect-[0.85] w-[60px] "
-                /> */}
+               <h1 className="text-xl ml-2 font-sans"> NextStep</h1>
+              
                  <div className="ml-auto flex space-x-4 hidden md:flex pr-4 mt-4">
-                 <Button className="bg-stone-950 hover:bg-blue-600" href="/" color="dark" pill>
-  Home
-</Button>
-                 <Button className="bg-stone-950 hover:bg-blue-600" href="/about" color="dark" pill>
-  About Us
-</Button>
+             
+             <Link to="/">
+  <button className="mt-2 text-md hover:text-black">Home</button>
+</Link>
+            <Link to="/about">
+  <button className="mt-2 text-md hover:text-black">About</button>
+</Link>
 
-          <Button className="bg-stone-950 hover:bg-blue-600" href="/contact" color="dark" pill>
-            Contact Us
-          </Button>
-          <Button className="bg-stone-950 hover:bg-blue-600"  href="/signup" color="dark" pill>
-            SignUp
-          </Button>
+<Link to="/contact">
+  <button className="mt-2 text-md hover:text-black">ContactUs</button>
+</Link>
+          <Button href="/Signup" className="hover:bg-blue-500" color="dark" pill>SignUp</Button>
         </div>
         
         

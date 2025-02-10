@@ -3,6 +3,7 @@ import { Header } from "../Components/Header";
 import { HeroSection } from "../Components/HeroSection";
 import { StorySection } from "../Components/StorySection";
 import { MessageSection } from "../Components/MessageSection";
+import { FooterSection } from "../Components/FooterSection";
 // import { NavbarMain } from "../Components/NavbarMain";
 
 
@@ -21,6 +22,7 @@ export function About() {
       <HeroSection />
       <StorySection />
       <MessageSection />
+      <FooterSection/>
     </div>
   );
 }

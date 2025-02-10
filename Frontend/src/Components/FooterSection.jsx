@@ -14,7 +14,7 @@ export function FooterSection() {
     <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
       <li>
         <a
-          href="#"
+          href="https://github.com/MisbahSubhani/NEXTSTEP" target="_blank"
           class="text-slate-700 hover:text-slate-500 focus:text-slate-500 text-sm"
         >
        <img className="w-8" src={Githublogo}/>
@@ -34,7 +34,7 @@ export function FooterSection() {
           class="text-slate-700 hover:text-slate-500 focus:text-slate-500 text-sm"
         >
           Contribute
-        </a>
+        </a> 
       </li>
       <li>
         <a
