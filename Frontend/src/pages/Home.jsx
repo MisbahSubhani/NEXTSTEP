@@ -8,7 +8,7 @@ import { Navbarnew } from "../Components/Navbarnew";
 import { Header } from "../Components/Header";
 import { SlideImage } from "../Components/SlideImage";
 import { MidHome } from "../Components/MidHome";
-import Dialogcom from "../Components/Dialogcom";
+
 
 export function Home() {
   return (

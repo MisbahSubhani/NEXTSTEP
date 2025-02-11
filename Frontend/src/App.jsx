@@ -27,7 +27,7 @@ import { Contact } from "./pages/Contact";
           <Route path="/About" element={<About />} /> 
           <Route path="/Contact" element={<Contact />} /> 
          
-        
+         
           <Route path="/internship" element={<InternshipPage />} /> 
             
           

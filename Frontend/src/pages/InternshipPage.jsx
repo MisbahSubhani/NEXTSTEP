@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import res from './Opp.json';
-import { Navbarnew } from '../Components/Navbarnew';
+import { DashboardNav } from '../Components/DashboardNav';
 import { FooterSection } from '../Components/FooterSection';
+import { DrawerDefault } from '../Components/Drawer';
+import { Dialogcom } from '../Components/Dialogcom';
+import { Profile } from '../Components/Profile';
 export function InternshipPage() {
   const [internships, setInternships] = useState([]);
   const [disabledButtons, setDisabledButtons] = useState([]);
@@ -41,7 +44,9 @@ export function InternshipPage() {
 
   return (
     <div className="bg-gradient-to-r from-[#020024] via-[#386060] to-[#386060] min-h-screen">
-     <Navbarnew />
+     <DashboardNav/>
+   
+    
 
       <main className="py-10 px-4">
         <section className="max-w-6xl mx-auto">
@@ -108,7 +113,7 @@ export function InternshipPage() {
         </section>
       </main>
 
-     <FooterSection/>
+     {/* <FooterSection/> */}
     </div>
   );
 }
