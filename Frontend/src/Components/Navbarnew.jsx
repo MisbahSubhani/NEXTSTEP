@@ -2,7 +2,7 @@
 import React from "react";
 import { useState } from "react";
 import { Button } from "flowbite-react";
-import Logo from "../assets/FinalLogo.png"
+import Nextlogo from "../assets/Nextlogo.jpeg"
 import { Link } from "react-router-dom";
 export function Navbarnew() {
 const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -38,7 +38,9 @@ const [isSidebarOpen, setIsSidebarOpen] = useState(false);
             
               <div className="flex justify-between items-center text-sm font-extrabold text-white px-5 pt-1 pb-4">
                 {/* Logo */}
-               <h1 className="text-xl ml-2 font-sans"> NextStep</h1>
+                  <h1 className="text-xl">
+                    NextStep
+                  </h1>
               
                  <div className="ml-auto flex space-x-4 hidden md:flex pr-4 mt-4">
              
