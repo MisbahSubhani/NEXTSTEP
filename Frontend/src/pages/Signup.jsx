@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import axios from "axios";
-
+import { GoogleLogin } from "@react-oauth/google";
 export function SignUp() {
   const [email,setEmail]= useState('');
   const [password,setPassword]= useState('');
@@ -60,6 +60,16 @@ export function SignUp() {
             }} className="bg-blue-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-blue-600">
               Create Account
             </button>
+            <GoogleLogin
+        onSuccess={(response) => {
+          console.log("Login Success:", response);
+          navigate("/"); // Redirect to home after login
+        }}
+        onError={() => {
+          console.log("Login Failed");
+        }}
+      />
+            
           </div>
           
           <div className="mt-4 flex items-center w-full text-center">
