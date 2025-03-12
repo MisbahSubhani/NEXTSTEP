@@ -6,6 +6,7 @@ import { FooterSection } from '../Components/FooterSection';
 import { DrawerDefault } from '../Components/Drawer';
 import { Dialogcom } from '../Components/Dialogcom';
 import { Profile } from '../Components/Profile';
+import { Navbarnew } from '../Components/Navbarnew';
 export function InternshipPage() {
   const [internships, setInternships] = useState([]);
   const [disabledButtons, setDisabledButtons] = useState([]);
@@ -44,7 +45,7 @@ export function InternshipPage() {
 
   return (
     <div className="bg-gradient-to-r from-[#020024] via-[#386060] to-[#386060] min-h-screen">
-     <DashboardNav/>
+     <Navbarnew/>
    
     
 
