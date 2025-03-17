@@ -19,7 +19,7 @@ export function MidHome() {
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-center mb-6 text-white underline"
             style={{ fontFamily: 'Times New Roman' }}>
-              Explore Top Jobs & Internships
+              Explore Top Jobs & Get Internships
             </h2>
             {/* Add search input or other elements here if needed */}
           </div>
