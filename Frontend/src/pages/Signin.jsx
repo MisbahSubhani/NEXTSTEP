@@ -14,7 +14,7 @@ export function Signin() {
     e.preventDefault();
     const credentials = { email, password };
     try {
-      const response = await fetch('http://localhost:3001/signin', {
+      const response = await fetch('http://localhost:3001/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ export function Signin() {
       const data = await response.json();
       if (response.ok) {
         setMessage("Login successful");
-        navigate('/about');
+        navigate('/internship');
       } else {
         setMessage(data.message || "Invalid Credentials");
       }
@@ -51,7 +51,7 @@ export function Signin() {
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Email Address
               </label>
-              <input onClick={(e) => setEmail(e.target.value)}
+              <input onChange={(e) => setEmail(e.target.value)}
                 className="text-gray-700 border border-gray-300 rounded py-2 px-4 block w-full focus:outline-2 focus:outline-blue-700"
                 type="email"
                 required
@@ -63,7 +63,7 @@ export function Signin() {
                   Password
                 </label>
               </div>
-              <input onClick={(e) => setPassword(e.target.value)}
+              <input onChange={(e) => setPassword(e.target.value)}
                 className="text-gray-700 border border-gray-300 rounded py-2 px-4 block w-full focus:outline-2 focus:outline-blue-700"
                 type="password" placeholder="password"
               />
