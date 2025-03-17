@@ -15,7 +15,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                dir('frontend') { // Navigate to frontend folder
+                dir('Frontend') { // Navigate to frontend folder
                     sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
                 }
             }
