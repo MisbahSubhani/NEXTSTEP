@@ -11,7 +11,7 @@ export function SignUp() {
 
   const handleSignup = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/api/auth/signup", {
+      const response = await axios.post("http://localhost:3001/signup", {
         name,
         email,
         password
@@ -21,8 +21,8 @@ export function SignUp() {
       alert("Signup Successful.");
       navigate("/signin");
     } catch (error) {
-      alert(error.response?.data?.message || "Signup failed. Please try again.");
-    }
+      alert("signup failed")
+    }    
   };
 
   return (
