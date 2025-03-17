@@ -22,14 +22,14 @@ pipeline {
         }
 
         stage('Run Docker Container') {
-    steps {
-        sh '''
-          docker rm -f nextstep-frontend-container || true
-          docker run -d -p 3000:80 --name nextstep-frontend-container nextstep-frontend:latest
-        '''
+            steps {
+                sh '''
+                    docker rm -f nextstep-frontend-container || true
+                    docker run -d -p 3000:80 --name nextstep-frontend-container $IMAGE_NAME:$IMAGE_TAG
+                '''
+            }
+        }
     }
-}
-
 
     post {
         always {
@@ -37,3 +37,4 @@ pipeline {
         }
     }
 }
+
