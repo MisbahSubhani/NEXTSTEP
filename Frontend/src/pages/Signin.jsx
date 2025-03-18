@@ -14,7 +14,7 @@ export function Signin() {
     const credentials = { email, password };
     
     try {
-      const response = await axios.post('http://localhost:3001/login', credentials, {
+      const response = await axios.post('http://3.218.252.251:3001/login', credentials, {
         headers: {
           'Content-Type': 'application/json',
         }

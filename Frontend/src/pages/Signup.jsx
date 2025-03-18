@@ -11,7 +11,7 @@ export function SignUp() {
 
   const handleSignup = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/signup", {
+      const response = await axios.post("http://3.218.252.251:3001/signup", {
         name,
         email,
         password
