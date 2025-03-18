@@ -43,7 +43,7 @@ pipeline {
             steps {
                 withCredentials([
                     string(credentialsId: 'backend-db-url', variable: 'DB_URL'),
-                    string(credentialsId: 'backend-jwt-secret', variable: 'JWT_SECRET')
+                    string(credentialsId: 'JWT_SECRET', variable: 'JWT_SECRET')
                 ]) {
                     sh '''
                     docker rm -f nextstep-backend-container || true
