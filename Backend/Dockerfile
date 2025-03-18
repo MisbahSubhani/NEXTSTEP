@@ -1,11 +1,17 @@
-FROM node:18-alpine
+FROM node:18-slim
 
 WORKDIR /app
 
+# Install OpenSSL and dependencies
+RUN apt-get update && apt-get install -y openssl
+
 COPY package*.json ./
+
 RUN npm install
 
 COPY prisma ./prisma
+
+RUN npx prisma generate
 
 COPY . .
 
@@ -16,5 +22,4 @@ RUN npm prune --production
 ENV NODE_ENV=production
 ENV PORT=3001
 
-# Add prisma generate + migrate deploy
-CMD npx prisma generate && npx prisma migrate deploy && npm start
+CMD ["npm", "start"]
