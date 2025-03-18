@@ -2,19 +2,15 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install ALL dependencies, including devDependencies (required for tsc compilation)
-RUN npm install
+RUN npm instal
+RUN npx prisma generate
 
-# Copy all source code
 COPY . .
 
-# Build TypeScript
 RUN npm run build
 
-# Install only production dependencies (optional optimization)
 RUN npm prune --production
 
 ENV NODE_ENV=production
