@@ -18,6 +18,6 @@ RUN npm run build
 RUN npm prune --production
 
 ENV NODE_ENV=production
-ENV PORT=5000
+ENV PORT=3001
 
 CMD ["npm", "start"]
