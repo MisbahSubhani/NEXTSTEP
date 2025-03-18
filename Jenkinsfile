@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/YourRepo/NEXTSTEP.git', branch: 'main'
+                git url: 'https://github.com/MisbahSubhani/NEXTSTEP', branch: 'main'
             }
         }
 
@@ -30,20 +30,19 @@ pipeline {
                 }
             }
         }
-
         stage('Run Backend Docker Container') {
             steps {
-                sh 'docker rm -f nextstep-backend-container || true'
-                // Assuming you want to pass DB URL without adding it to Git:
-                withCredentials([string(credentialsId: 'backend-db-url', variable: 'DB_URL')]) {
-                    sh '''
-                    docker run -d -p 5000:5000 --name nextstep-backend-container \
-                    -e DATABASE_URL=$DB_URL \
-                    nextstep-backend:latest
-                    '''
-                }
-            }
+        sh 'docker rm -f nextstep-backend-container || true'
+        withCredentials([string(credentialsId: 'backend-db-url', variable: 'DB_URL')]) {
+            sh '''
+            docker run -d -p 3001:3001 --name nextstep-backend-container \
+            -e DATABASE_URL=$DB_URL \
+            nextstep-backend:latest
+            '''
         }
+    }
+}
+
     }
 
     post {
