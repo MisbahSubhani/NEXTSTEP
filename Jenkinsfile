@@ -6,14 +6,16 @@ pipeline {
         JWT_SECRET = credentials('JWT_SECRET')
     }
 
-    stages {
-        stage('Build Docker Image') {
-            steps {
-                sh '''
-                docker build -t nextstep-backend-image .
-                '''
+    stage('Build Docker Image') {
+    steps {
+        dir('Backend') {
+            script {
+                sh 'docker build -f Dockerfile -t $BACKEND_IMAGE .'
             }
         }
+    }
+}
+
 
         stage('Stop & Remove Existing Container') {
             steps {
