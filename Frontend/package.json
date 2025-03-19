@@ -17,6 +17,7 @@
     "@react-pdf-viewer/default-layout": "^3.12.0",
     "axios": "^1.8.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "fetch": "^1.1.0",
     "flowbite-react": "^0.10.2",
     "gsap": "^3.12.7",

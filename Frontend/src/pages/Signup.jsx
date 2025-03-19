@@ -11,16 +11,16 @@ export function SignUp() {
 
   const handleSignup = async () => {
     try {
-      const response = await axios.post("http://3.218.252.251:3001/signup", {
+      const response = await axios.post('http://'+import.meta.env.VITE_SERVER_URL+'/signup', {
         name,
         email,
         password
       });
 
-      localStorage.setItem("token", response.data.token);
       alert("Signup Successful.");
       navigate("/signin");
     } catch (error) {
+      console.log(error)
       alert("signup failed")
     }    
   };

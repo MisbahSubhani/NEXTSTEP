@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "flowbite-react";
 import Nextlogo from "../assets/Nextlogo.jpeg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const navItems = [
   { text: "Home", href: "/" },
@@ -13,13 +13,68 @@ const navItems = [
 
 export function Navbarnew() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate('/signin');
+  };
 
   const renderNavItems = () => {
-    return navItems.map((item) => (
-      <Link key={item.href} to={item.href}>
-        <button className="mt-2 text-md hover:text-black">{item.text}</button>
-      </Link>
-    ));
+    return navItems.map((item) => {
+      if (item.text === "SignUp" && isLoggedIn) {
+        return (
+          <button
+            key="logout"
+            onClick={handleLogout}
+            className="mt-2 text-md hover:text-black"
+          >
+            Log Out
+          </button>
+        );
+      }
+      return (
+        <Link key={item.href} to={item.href}>
+          <button className="mt-2 text-md hover:text-black">{item.text}</button>
+        </Link>
+      );
+    });
+  };
+
+  const renderSidebarNavItems = () => {
+    return navItems.map((item) => {
+      if (item.text === "SignUp" && isLoggedIn) {
+        return (
+          <button
+            key="logout-sidebar"
+            onClick={() => {
+              handleLogout();
+              toggleSidebar();
+            }}
+            className="py-2 hover:underline text-left text-lg"
+          >
+            Log Out
+          </button>
+        );
+      }
+      return (
+        <Link
+          key={item.href}
+          to={item.href}
+          className="py-2 hover:underline text-left text-lg"
+          onClick={toggleSidebar}
+        >
+          {item.text}
+        </Link>
+      );
+    });
   };
 
   const toggleSidebar = () => {
@@ -60,16 +115,7 @@ export function Navbarnew() {
 
           {/* Sidebar Navigation Items */}
           <nav className="flex flex-col gap-5 mt-10 px-5">
-            {navItems.map((item, index) => (
-              <Link
-                key={index}
-                to={item.href}
-                className="py-2 hover:underline text-left text-lg"
-                onClick={toggleSidebar}
-              >
-                {item.text}
-              </Link>
-            ))}
+            {renderSidebarNavItems()}
           </nav>
         </div>
       </div>

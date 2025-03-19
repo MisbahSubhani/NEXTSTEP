@@ -14,15 +14,17 @@ export function Signin() {
     const credentials = { email, password };
     
     try {
-      const response = await axios.post('http://3.218.252.251:3001/login', credentials, {
+      const response = await axios.post('http://'+import.meta.env.VITE_SERVER_URL+'/login', credentials, {
         headers: {
           'Content-Type': 'application/json',
         }
       });
-      
+
+      localStorage.setItem("token", response.data.token)
       setMessage("Login successful");
       navigate('/internship');
     } catch (error) {
+      console.log(import.meta.env.SERVER_URL)
       if (error.response) {
         // Server responded with an error status
         setMessage(error.response.data.message || "Invalid Credentials");
