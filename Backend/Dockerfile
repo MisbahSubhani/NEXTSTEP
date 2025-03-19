@@ -6,7 +6,7 @@ COPY . .
 
 RUN bun install
 
-# 🟢 Bun equivalent of npx
+# 🟢 Bun equivalent of n
 RUN bunx prisma generate
 
 EXPOSE 3001
