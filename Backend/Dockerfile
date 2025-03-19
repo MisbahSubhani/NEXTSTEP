@@ -1,27 +1,20 @@
-FROM node:18
+# Use official Bun image
+FROM oven/bun:1.0
 
+# Set working directory
 WORKDIR /app
 
-# Install openssl
-RUN apt-get update && apt-get install -y openssl
+# Copy package.json, bun.lockb, and tsconfig
+COPY package.json bun.lockb tsconfig.backend.json ./
 
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install
+# Install dependencies using Bun
+RUN bun install
 
-# Copy prisma files
-COPY prisma ./prisma
-
-# Copy rest of the code
+# Copy all source code
 COPY . .
 
-# Prisma generate will use DATABASE_URL at runtime
-RUN npm run build
-RUN npm prune --production
-
-ENV NODE_ENV=production
-ENV PORT=3001
-
+# Expose port (update if different)
 EXPOSE 3001
 
-CMD ["sh", "-c", "npx prisma generate && npm start"]
+# Start the app using Bun
+CMD ["bun", "src/index.ts"]

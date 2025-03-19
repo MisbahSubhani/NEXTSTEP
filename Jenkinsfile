@@ -2,68 +2,49 @@ pipeline {
     agent any
 
     environment {
-        // Frontend and Backend Image Names
-        FRONTEND_IMAGE = 'nextstep-frontend:latest'
-        BACKEND_IMAGE  = 'nextstep-backend:latest'
+        BACKEND_CONTAINER = 'nextstep-backend-container'
+        BACKEND_IMAGE = 'nextstep-backend-image'
     }
 
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                git url: 'https://github.com/MisbahSubhani/NEXTSTEP', branch: 'main'
+                git 'https://github.com/YourRepo/NextStep.git'
             }
         }
 
-        stage('Build Frontend Docker Image') {
-            steps {
-                dir('Frontend') {
-                    sh 'docker build -t $FRONTEND_IMAGE .'
-                }
-            }
-        }
-
-        stage('Run Frontend Docker Container') {
-            steps {
-                sh '''
-                docker rm -f nextstep-frontend-container || true
-                docker run -d -p 3000:80 --name nextstep-frontend-container $FRONTEND_IMAGE
-                '''
-            }
-        }
-
-        stage('Build Backend Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 dir('Backend') {
-                    sh 'docker build -t $BACKEND_IMAGE .'
+                    script {
+                        sh 'docker build -t $BACKEND_IMAGE .'
+                    }
                 }
             }
         }
 
-        stage('Run Backend Docker Container') {
+        stage('Stop & Remove Old Container') {
             steps {
-                withCredentials([
-                    string(credentialsId: 'backend-db-url', variable: 'DB_URL'),
-                    string(credentialsId: 'JWT_SECRET', variable: 'JWT_SECRET')
-                ]) {
+                script {
                     sh '''
-                    docker rm -f nextstep-backend-container || true
-                    echo "Database URL: $DB_URL"
-                    echo "JWT Secret: $JWT_SECRET"
-                    
-                    docker run -d -p 3001:3001 \
-                      --name nextstep-backend-container \
-                      -e DATABASE_URL=$DB_URL \
-                      -e JWT_SECRET=$JWT_SECRET \
-                      $BACKEND_IMAGE
+                    docker stop $BACKEND_CONTAINER || true
+                    docker rm $BACKEND_CONTAINER || true
                     '''
                 }
             }
         }
-    }
 
-    post {
-        always {
-            cleanWs()
+        stage('Run New Container') {
+            steps {
+                script {
+                    sh '''
+                    docker run -d --name $BACKEND_CONTAINER -p 3001:3001 \
+                    -e DATABASE_URL=${DATABASE_URL} \
+                    -e JWT_SECRET=${JWT_SECRET} \
+                    $BACKEND_IMAGE
+                    '''
+                }
+            }
         }
     }
 }
