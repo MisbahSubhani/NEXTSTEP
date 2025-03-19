@@ -5,8 +5,6 @@
   "license": "MIT",
   "scripts": {
   "start": "bun run index.ts",
-  "dev": "bun run index.ts",
-  "prisma": "prisma",
   "start-with-migration": "bunx prisma migrate deploy && bun run index.ts"
 }
 ,
