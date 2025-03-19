@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         BACKEND_IMAGE = 'nextstep-backend-image'
+        FRONTEND_IMAGE = 'nextstep-frontend-image'
         DATABASE_URL = credentials('backend-db-url')
         JWT_SECRET = credentials('JWT_SECRET')
     }
@@ -14,7 +15,8 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        /* ===== BACKEND ===== */
+        stage('Build Backend Docker Image') {
             steps {
                 dir('Backend') {
                     script {
@@ -24,7 +26,7 @@ pipeline {
             }
         }
 
-        stage('Stop & Remove Existing Container') {
+        stage('Stop & Remove Backend Container') {
             steps {
                 sh '''
                 docker stop nextstep-backend-container || true
@@ -33,7 +35,7 @@ pipeline {
             }
         }
 
-        stage('Run Container with Env Vars') {
+        stage('Run Backend Container') {
             steps {
                 sh '''
                 docker run -d --name nextstep-backend-container \
@@ -41,6 +43,36 @@ pipeline {
                 -e DATABASE_URL=$DATABASE_URL \
                 -e JWT_SECRET=$JWT_SECRET \
                 nextstep-backend-image
+                '''
+            }
+        }
+
+        /* ===== FRONTEND ===== */
+        stage('Build Frontend Docker Image') {
+            steps {
+                dir('Frontend') {
+                    script {
+                        sh "docker build -f Dockerfile -t $FRONTEND_IMAGE ."
+                    }
+                }
+            }
+        }
+
+        stage('Stop & Remove Frontend Container') {
+            steps {
+                sh '''
+                docker stop nextstep-frontend-container || true
+                docker rm nextstep-frontend-container || true
+                '''
+            }
+        }
+
+        stage('Run Frontend Container') {
+            steps {
+                sh '''
+                docker run -d --name nextstep-frontend-container \
+                -p 3000:3000 \
+                nextstep-frontend-image
                 '''
             }
         }
