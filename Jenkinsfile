@@ -2,48 +2,37 @@ pipeline {
     agent any
 
     environment {
-        BACKEND_CONTAINER = 'nextstep-backend-container'
-        BACKEND_IMAGE = 'nextstep-backend-image'
+        DATABASE_URL = credentials('backend-db-url')
+        JWT_SECRET = credentials('JWT_SECRET')
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/MisbahSubhani/NEXTSTEP'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
-                dir('Backend') {
-                    script {
-                        sh 'docker build -t $BACKEND_IMAGE .'
-                    }
-                }
+                sh '''
+                docker build -t nextstep-backend-image .
+                '''
             }
         }
 
-        stage('Stop & Remove Old Container') {
+        stage('Stop & Remove Existing Container') {
             steps {
-                script {
-                    sh '''
-                    docker stop $BACKEND_CONTAINER || true
-                    docker rm $BACKEND_CONTAINER || true
-                    '''
-                }
+                sh '''
+                docker stop nextstep-backend-container || true
+                docker rm nextstep-backend-container || true
+                '''
             }
         }
 
-        stage('Run New Container') {
+        stage('Run Container with Env Vars') {
             steps {
-                script {
-                    sh '''
-                    docker run -d --name $BACKEND_CONTAINER -p 3001:3001 \
-                    -e DATABASE_URL=${DATABASE_URL} \
-                    -e JWT_SECRET=${JWT_SECRET} \
-                    $BACKEND_IMAGE
-                    '''
-                }
+                sh '''
+                docker run -d --name nextstep-backend-container \
+                -p 3001:3001 \
+                -e DATABASE_URL=$DATABASE_URL \
+                -e JWT_SECRET=$JWT_SECRET \
+                nextstep-backend-image
+                '''
             }
         }
     }
