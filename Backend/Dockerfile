@@ -5,7 +5,7 @@ FROM oven/bun:1.0
 WORKDIR /app
 
 # Copy package.json, bun.lockb, and tsconfig
-COPY package.json bun.lockb tsconfig.backend.json ./
+COPY package.json bun.lock tsconfig.backend.json ./
 
 # Install dependencies using Bun
 RUN bun install
