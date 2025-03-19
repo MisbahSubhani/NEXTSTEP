@@ -1,16 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ES2020",                       // Compatible target for Node.js
-    "module": "CommonJS",                     // Use CommonJS for Node.js
-    "lib": ["ESNext"],                        // Use latest JS features
-    "rootDir": "./src",                       // Source folder
-    "outDir": "./dist",                       // Compiled output
-    "moduleResolution": "node",               // Node.js style module resolution
-    "esModuleInterop": true,                  // For compatibility with common JS packages
-    "forceConsistentCasingInFileNames": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "strict": true,
-    "skipLibCheck": true
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node"],
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules"]
 }

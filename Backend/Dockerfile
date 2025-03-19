@@ -1,20 +1,20 @@
-# Use official Bun image
+# Use Bun base image
 FROM oven/bun:1.0
 
 # Set working directory
 WORKDIR /app
 
-# Copy package.json, bun.lockb, and tsconfig
-COPY package.json bun.lock tsconfig.backend.json ./
-
-# Install dependencies using Bun
-RUN bun install
-
-# Copy all source code
+# Copy files
 COPY . .
 
-# Expose port (update if different)
+# Install dependencies
+RUN bun install
+
+# Generate Prisma Client
+RUN npx prisma generate
+
+# Expose port
 EXPOSE 3001
 
-# Start the app using Bun
-CMD ["bun", "src/index.ts"]
+# Run app
+CMD ["bun", "index.ts"]
