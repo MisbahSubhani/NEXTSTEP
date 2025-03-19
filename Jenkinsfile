@@ -2,20 +2,27 @@ pipeline {
     agent any
 
     environment {
+        BACKEND_IMAGE = 'nextstep-backend-image'
         DATABASE_URL = credentials('backend-db-url')
         JWT_SECRET = credentials('JWT_SECRET')
     }
 
-    stage('Build Docker Image') {
-    steps {
-        dir('Backend') {
-            script {
-                sh 'docker build -f Dockerfile -t $BACKEND_IMAGE .'
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/MisbahSubhani/NEXTSTEP'
             }
         }
-    }
-}
 
+        stage('Build Docker Image') {
+            steps {
+                dir('Backend') {
+                    script {
+                        sh "docker build -f Dockerfile -t $BACKEND_IMAGE ."
+                    }
+                }
+            }
+        }
 
         stage('Stop & Remove Existing Container') {
             steps {
