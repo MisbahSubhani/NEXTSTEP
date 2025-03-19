@@ -4,10 +4,12 @@
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
-   "start": "bunx prisma migrate deploy && bun run index.ts",
-    "dev": "bun run index.ts",
-    "prisma": "prisma"
-  },
+  "start": "bun run index.ts",
+  "dev": "bun run index.ts",
+  "prisma": "prisma",
+  "start-with-migration": "bunx prisma migrate deploy && bun run index.ts"
+}
+,
   "dependencies": {
     "@prisma/client": "^5.14.0",
     "bcrypt": "^5.1.0",
