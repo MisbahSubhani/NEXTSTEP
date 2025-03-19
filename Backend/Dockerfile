@@ -8,6 +8,8 @@ RUN bun install
 
 # 🟢 Bun equivalent of n
 RUN bunx prisma generate
+RUN bunx prisma migrate deploy
+
 
 EXPOSE 3001
 
