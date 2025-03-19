@@ -5,8 +5,8 @@ WORKDIR /app
 COPY . .
 
 RUN bun install
-RUN bunx prisma generate
 
 EXPOSE 3001
 
-CMD ["bun", "run", "start-with-migration"]
+# Move Prisma commands to CMD (runtime)
+CMD bunx prisma migrate deploy && bun run index.ts
