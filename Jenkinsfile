@@ -71,7 +71,7 @@ pipeline {
             steps {
                 sh '''
                 docker run -d --name nextstep-frontend-container \
-                -p 3000:3000 \
+                -p 3000:80 \
                 nextstep-frontend-image
                 '''
             }
