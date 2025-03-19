@@ -5,12 +5,8 @@ WORKDIR /app
 COPY . .
 
 RUN bun install
-
-# 🟢 Bun equivalent of n
 RUN bunx prisma generate
-RUN bunx prisma migrate deploy
-
 
 EXPOSE 3001
 
-CMD ["bun", "index.ts"]
+CMD ["bun", "sh", "-c", "bunx prisma migrate deploy && bun run index.ts"]

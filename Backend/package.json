@@ -4,7 +4,7 @@
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
-    "start": "bun run index.ts",
+   "start": "bunx prisma migrate deploy && bun run index.ts",
     "dev": "bun run index.ts",
     "prisma": "prisma"
   },
