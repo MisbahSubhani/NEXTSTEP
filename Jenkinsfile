@@ -5,7 +5,9 @@ pipeline {
         BACKEND_IMAGE = 'nextstep-backend-image'
         FRONTEND_IMAGE = 'nextstep-frontend-image'
         DATABASE_URL = credentials('backend-db-url')
+        BACKEND_URL = credentials('BACKEND_URL')
         JWT_SECRET = credentials('JWT_SECRET')
+        SONAR_TOKEN = credentials('sonar') 
     }
 
     stages {
@@ -52,7 +54,11 @@ pipeline {
             steps {
                 dir('Frontend') {
                     script {
-                        sh "docker build -f Dockerfile -t $FRONTEND_IMAGE ."
+                        // Inject BACKEND_URL dynamically into .env file
+                        sh """
+                        echo "VITE_SERVER_URL=$BACKEND_URL" > .env
+                        docker build -f Dockerfile -t $FRONTEND_IMAGE .
+                        """
                     }
                 }
             }
@@ -78,7 +84,7 @@ pipeline {
         }
 
         /* ===== SONARQUBE ANALYSIS ===== */
-      stage('SonarQube Analysis') {
+        stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar-nextstep') {
                     script {
@@ -88,7 +94,7 @@ pipeline {
                             -Dsonar.projectKey=nextstep \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://3.218.252.251:9000 \
-                            -Dsonar.login=sqp_09103f1e1039201f6e834d7065816be14032c7d5
+                            -Dsonar.login=$SONAR_TOKEN
                         """
                     }
                 }
