@@ -83,7 +83,7 @@ pipeline {
                 withSonarQubeEnv('sonar-nextstep') { // Matches your SonarQube server config name
                     sh '''
                     sonar-scanner \
-                      -Dsonar.projectKey=NextStep \
+                      -Dsonar.projectKey=nextstep \
                       -Dsonar.sources=. \
                       -Dsonar.host.url=http://3.218.252.251:9000
                     '''
