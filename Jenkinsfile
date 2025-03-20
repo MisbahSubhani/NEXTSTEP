@@ -78,17 +78,18 @@ pipeline {
         }
 
         /* ===== SONARQUBE ANALYSIS ===== */
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonar-nextstep') { // Matches your SonarQube server config name
-                    sh '''
-                    sonar-scanner \
-                      -Dsonar.projectKey=nextstep \
-                      -Dsonar.sources=. \
-                      -Dsonar.host.url=http://3.218.252.251:9000
-                    '''
-                }
-            }
-        }
+       stage('SonarQube Analysis') {
+  steps {
+    withSonarQubeEnv('sonar-nextstep') {
+      withSonarScanner('sonar') {
+        sh '''
+          cd backend
+          sonar-scanner -Dsonar.projectKey=nextstep -Dsonar.sources=.
+        '''
+      }
+    }
+  }
+}
+
     }
 }
