@@ -53,7 +53,7 @@ app.post("/login", async (req: Request, res: Response) => {
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: "Invalid email or password" });
-        
+
         //@ts-ignore
         const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "1h" });
         res.json({ token });
@@ -87,7 +87,7 @@ app.get('/profile', authenticateUser, async (req: AuthRequest, res: Response) =>
     try {
         const user = await prisma.user.findUnique({
             where: { id: req.user?.userId },
-            select: { id:true, name: true, email: true },
+            select: { id: true, name: true, email: true },
         });
 
         if (!user) return res.status(404).json({ message: "User not found" });
@@ -101,5 +101,19 @@ app.get('/profile', authenticateUser, async (req: AuthRequest, res: Response) =>
         }
     }
 });
+
+//@ts-ignore
+app.post('/feedback', async (req: AuthRequest, res: Response) => {
+    const { name, email, message } = req.body;
+
+    try {
+        await prisma.feedback.create({
+            data: { name, email, message },
+        })
+        res.json({ message: "successful" })
+    } catch (error) {
+        res.json({ message: "error submitting feedback, please try again later" })
+    }
+})
 
 app.listen(3001, () => console.log("Server running on port 3001"));
