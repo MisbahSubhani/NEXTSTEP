@@ -8,10 +8,6 @@ pipeline {
         JWT_SECRET = credentials('JWT_SECRET')
     }
 
-    tools {
-        sonarQube 'sonar'  // This matches your SonarQube scanner name
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -84,7 +80,7 @@ pipeline {
         /* ===== SONARQUBE ANALYSIS ===== */
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonar') { // This matches the SonarQube Server name in Jenkins
+                withSonarQubeEnv('sonar') { // Matches your SonarQube server config name
                     sh '''
                     sonar-scanner \
                       -Dsonar.projectKey=NextStep \
