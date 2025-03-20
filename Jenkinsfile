@@ -8,6 +8,10 @@ pipeline {
         JWT_SECRET = credentials('JWT_SECRET')
     }
 
+    tools {
+        sonarQube 'sonar'  // This matches your SonarQube scanner name
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -74,6 +78,20 @@ pipeline {
                 -p 3000:80 \
                 nextstep-frontend-image
                 '''
+            }
+        }
+
+        /* ===== SONARQUBE ANALYSIS ===== */
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonar') { // This matches the SonarQube Server name in Jenkins
+                    sh '''
+                    sonar-scanner \
+                      -Dsonar.projectKey=NextStep \
+                      -Dsonar.sources=. \
+                      -Dsonar.host.url=http://3.218.252.251:9000
+                    '''
+                }
             }
         }
     }
