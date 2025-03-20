@@ -80,7 +80,7 @@ pipeline {
         /* ===== SONARQUBE ANALYSIS ===== */
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonar') { // Matches your SonarQube server config name
+                withSonarQubeEnv('sonar-nextstep') { // Matches your SonarQube server config name
                     sh '''
                     sonar-scanner \
                       -Dsonar.projectKey=NextStep \
