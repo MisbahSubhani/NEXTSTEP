@@ -7,11 +7,11 @@ WORKDIR /app
 # Copy all files
 COPY . .
 
-# Install dependencies (disable frozen lockfile check)
-RUN bun install --production --no-frozen-lockfile
+# Install dependencies (WITHOUT --production to avoid lockfile issues)
+RUN bun install --no-frozen-lockfile
 
 # Expose backend port
 EXPOSE 3001
 
-# Apply Prisma migration & start backend
+# Apply Prisma migrations & run the app
 CMD bunx prisma migrate deploy && bun run src/index.ts
