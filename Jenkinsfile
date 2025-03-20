@@ -78,18 +78,22 @@ pipeline {
         }
 
         /* ===== SONARQUBE ANALYSIS ===== */
-       stage('SonarQube Analysis') {
-  steps {
-    withSonarQubeEnv('sonar-nextstep') {
-      withSonarScanner('sonar') {
-        sh '''
-          cd backend
-          sonar-scanner -Dsonar.projectKey=nextstep -Dsonar.sources=.
-        '''
-      }
-    }
-  }
-}
+      stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonar-nextstep') {
+                    script {
+                        def scannerHome = tool 'sonar'
+                        sh """
+                            ${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=nextstep \
+                            -Dsonar.sources=. \
+                            -Dsonar.host.url=http://3.218.252.251:9000 \
+                            -Dsonar.login=sqp_09103f1e1039201f6e834d7065816be14032c7d5
+                        """
+                    }
+                }
+            }
+        }
 
     }
 }
