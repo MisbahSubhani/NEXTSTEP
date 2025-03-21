@@ -19,7 +19,7 @@ export function Contact() {
     setSuccess(null);
 
     try {
-      const response = await fetch(`${backendUrl}/feedback`, {
+      const response = await fetch(`http://${backendUrl}/feedback`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
