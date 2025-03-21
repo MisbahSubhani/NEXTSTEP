@@ -17,7 +17,7 @@ export function Signin() {
     const credentials = { email, password };
     
     try {
-      const response = await axios.post(`${backendUrl}/login`, credentials, {
+      const response = await axios.post(`http://${backendUrl}/login`, credentials, {
         headers: {
           'Content-Type': 'application/json',
         }
@@ -32,7 +32,7 @@ export function Signin() {
       navigate('/internship');
       
     } catch (error) {
-      console.log(import.meta.env.SERVER_URL);
+      console.log(import.meta.env.VITE_SERVER_URL);
   
       // Display appropriate error toast
       if (error.response) {

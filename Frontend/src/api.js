@@ -1,7 +1,7 @@
-// api.js
+const backendUrl = import.meta.env.VITE_SERVER_URL;
 
-const backendUrl = import.meta.env.VITE_SERVER_URL 
-  ? `http://${import.meta.env.VITE_SERVER_URL}`
-  : 'http://localhost:3001';  
+if (!backendUrl) {
+  console.error('VITE_SERVER_URL is not defined. Please set it in your environment variables.');
+}
 
 export default backendUrl;
