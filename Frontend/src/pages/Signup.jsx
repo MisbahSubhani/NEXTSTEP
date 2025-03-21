@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Navbarnew } from "../Components/Navbarnew";
-
+import backendUrl from "../api";
 export function SignUp() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -11,7 +11,7 @@ export function SignUp() {
 
   const handleSignup = async () => {
     try {
-      const response = await axios.post('http://'+import.meta.env.VITE_SERVER_URL+'/signup', {
+      const response = await axios.post(`${backendUrl}/signup`, {
         name,
         email,
         password
