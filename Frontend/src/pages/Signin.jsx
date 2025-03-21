@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Navbarnew } from "../Components/Navbarnew";
 import axios from 'axios';
 import backendUrl from "../api";
+import { toast } from 'react-hot-toast';
+
 
 export function Signin() {
   const [email, setEmail] = useState('');
@@ -20,21 +22,27 @@ export function Signin() {
           'Content-Type': 'application/json',
         }
       });
-
-      localStorage.setItem("token", response.data.token)
-      setMessage("Login successful");
+  
+      localStorage.setItem("token", response.data.token);
+      
+      // ✅ Show Success Toast
+      toast.success('Login successful!');
+  
+      // Redirect
       navigate('/internship');
+      
     } catch (error) {
-      console.log(import.meta.env.SERVER_URL)
+      console.log(import.meta.env.SERVER_URL);
+  
+      // Display appropriate error toast
       if (error.response) {
-        // Server responded with an error status
-        setMessage(error.response.data.message || "Invalid Credentials");
+        toast.error(error.response.data.message || "Invalid Credentials");
       } else {
-        // Some other error (e.g., network issue)
-        setMessage("An error occurred. Please try again.");
+        toast.error("An error occurred. Please try again.");
       }
     }
   };
+  
 
   return (
     <>
@@ -63,7 +71,7 @@ export function Signin() {
               </div>
               <input onChange={(e) => setPassword(e.target.value)}
                 className="text-gray-700 border border-gray-300 rounded py-2 px-4 block w-full focus:outline-2 focus:outline-blue-700"
-                type="password" placeholder="password"
+                type="password" 
               />
             </div>
             <div className="mt-8">

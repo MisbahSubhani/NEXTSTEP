@@ -2,7 +2,8 @@ import { useState } from "react";
 import { FooterSection } from "../Components/FooterSection";
 import { Navbarnew } from "../Components/Navbarnew";
 import Githublogo from "../assets/Github.png";
-
+import backendUrl from "../api";
+import { toast } from "react-hot-toast"
 export function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ export function Contact() {
     setSuccess(null);
 
     try {
-      const response = await fetch("http://" + import.meta.env.VITE_SERVER_URL + "/feedback", {
+      const response = await fetch(`${backendUrl}/feedback`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,12 +30,12 @@ export function Contact() {
       const result = await response.json();
       if (!response.ok) throw new Error(result.message || "Something went wrong");
 
-      setSuccess("Message sent successfully!");
+      toast.success("Message sent successfully!");
       setName("");
       setEmail("");
       setMessage("");
     } catch (err) {
-      setError(err.message);
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }

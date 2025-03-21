@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Navbarnew } from "../Components/Navbarnew";
 import backendUrl from "../api";
+import { toast } from 'react-hot-toast';
 export function SignUp() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -17,11 +18,11 @@ export function SignUp() {
         password
       });
 
-      alert("Signup Successful.");
+      toast.success("Signup Successfully!");
       navigate("/signin");
     } catch (error) {
       console.log(error)
-      alert("signup failed")
+     toast.error("Signup failed!");
     }    
   };
 
