@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Navbarnew } from "../Components/Navbarnew";
 import axios from 'axios';
+import backendUrl from "../api";
 
 export function Signin() {
   const [email, setEmail] = useState('');
@@ -14,7 +15,7 @@ export function Signin() {
     const credentials = { email, password };
     
     try {
-      const response = await axios.post('http://'+import.meta.env.VITE_SERVER_URL+'/login', credentials, {
+      const response = await axios.post('${backendUrl}/login', credentials, {
         headers: {
           'Content-Type': 'application/json',
         }
