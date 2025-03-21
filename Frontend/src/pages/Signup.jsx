@@ -12,7 +12,7 @@ export function SignUp() {
 
   const handleSignup = async () => {
     try {
-      const response = await axios.post(`${backendUrl}/signup`, {
+      const response = await axios.post(`http://${backendUrl}/signup`, {
         name,
         email,
         password
