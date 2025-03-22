@@ -20,16 +20,44 @@ interface AuthRequest extends Request {
 
 // Signup Route
 //@ts-ignore
-app.post("/signup", async (req: Request, res: Response) => {
-    const { name, email, password } = req.body;
+app.post("/student/signup", async (req: Request, res: Response) => {
+    const { name, username, email, password } = req.body;
 
     try {
-        const existingUser = await prisma.user.findUnique({ where: { email } });
+        const existingUser = await prisma.student.findUnique({ where: { email } });
+        const existingUsername = await prisma.student.findUnique({ where: { username } });
         if (existingUser) return res.status(400).json({ message: "Email already exists" });
+        if (existingUsername) return res.status(400).json({ message: "Username already exists" });
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await prisma.user.create({
-            data: { name, email, password: hashedPassword },
+        const user = await prisma.student.create({
+            data: { name, email, username, password: hashedPassword },
+        });
+
+        res.status(201).json({ message: "User registered successfully", userId: user.id });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(500).json({ error: error.message });
+        } else {
+            res.status(500).json({ error: "An unknown error occurred" });
+        }
+    }
+});
+
+//@ts-ignore
+app.post("/hr/signup", async (req: Request, res: Response) => {
+    const { name, username, email, password } = req.body;
+
+    try {
+        const existingUser = await prisma.hR.findUnique({ where: { email } });
+        const existingUsername = await prisma.hR.findUnique({ where: { username } });
+
+        if (existingUser) return res.status(400).json({ message: "Email already exists" });
+        if (existingUsername) return res.status(400).json({ message: "Username already exists" });
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await prisma.hR.create({
+            data: { name, email, username, password: hashedPassword },
         });
 
         res.status(201).json({ message: "User registered successfully", userId: user.id });
@@ -44,18 +72,41 @@ app.post("/signup", async (req: Request, res: Response) => {
 
 // Login Route
 //@ts-ignore
-app.post("/login", async (req: Request, res: Response) => {
+app.post("/student/login", async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     try {
-        const user = await prisma.user.findUnique({ where: { email } });
-        if (!user) return res.status(400).json({ message: "Invalid email or password" });
+        const user = await prisma.student.findUnique({ where: { email } });
+        if (!user) return res.status(400).json({ message: "Invalid email, please sign up" });
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.status(400).json({ message: "Invalid email or password" });
+        if (!isMatch) return res.status(400).json({ message: "Wrong password, please try again" });
 
         //@ts-ignore
-        const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ userId: user.id }, JWT_SECRET);
+        res.json({ token });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(500).json({ error: error.message });
+        } else {
+            res.status(500).json({ error: "An unknown error occurred" });
+        }
+    }
+});
+
+//@ts-ignore
+app.post("/hr/login", async (req: Request, res: Response) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await prisma.hR.findUnique({ where: { email } });
+        if (!user) return res.status(400).json({ message: "Invalid email, please sign up" });
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) return res.status(400).json({ message: "Wrong password, please try again" });
+
+        //@ts-ignore
+        const token = jwt.sign({ userId: user.id }, JWT_SECRET);
         res.json({ token });
     } catch (error: unknown) {
         if (error instanceof Error) {
@@ -73,19 +124,20 @@ const authenticateUser = async (req: AuthRequest, res: Response, next: NextFunct
     try {
         //@ts-ignore
         const decoded = jwt.verify(token, JWT_SECRET);
-        req.user = { userId: decoded.userId }
+        req.user = { userId: decoded.id }
         next();
     } catch (error: unknown) {
         res.status(403).json({ message: "Invalid token" });
     }
 };
 
+//check if it is a student 
 //@ts-ignore
 app.get('/profile', authenticateUser, async (req: AuthRequest, res: Response) => {
     if (!req.user) return res.status(401).json({ message: "Unauthorized" });
 
     try {
-        const user = await prisma.user.findUnique({
+        const user = await prisma.student.findUnique({
             where: { id: req.user?.userId },
             select: { id: true, name: true, email: true },
         });
@@ -101,6 +153,7 @@ app.get('/profile', authenticateUser, async (req: AuthRequest, res: Response) =>
         }
     }
 });
+
 
 //@ts-ignore
 app.post('/feedback', async (req: AuthRequest, res: Response) => {

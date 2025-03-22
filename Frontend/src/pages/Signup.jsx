@@ -8,6 +8,7 @@ export function SignUp() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const navigate = useNavigate();
 
   const handleSignup = async () => {
@@ -15,6 +16,7 @@ export function SignUp() {
       const response = await axios.post(`http://${backendUrl}/signup`, {
         name,
         email,
+        username,
         password
       });
 
@@ -22,8 +24,8 @@ export function SignUp() {
       navigate("/signin");
     } catch (error) {
       console.log(error)
-     toast.error("Signup failed!");
-    }    
+      toast.error("Signup failed!");
+    }
   };
 
   return (
@@ -45,6 +47,17 @@ export function SignUp() {
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                className="text-gray-700 border border-gray-300 rounded py-2 px-4 block w-full focus:outline-2 focus:outline-blue-700"
+                type="text"
+                required
+              />
+            </div>
+
+            <div className="mt-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">Username</label>
+              <input
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 className="text-gray-700 border border-gray-300 rounded py-2 px-4 block w-full focus:outline-2 focus:outline-blue-700"
                 type="text"
                 required
