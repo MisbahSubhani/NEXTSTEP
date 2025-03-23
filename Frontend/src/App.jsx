@@ -15,6 +15,8 @@ import {
   import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
 import { Toaster } from 'react-hot-toast';
+import { Hrsection } from "./pages/hrsection";
+
   
   function App() {
     return (
@@ -28,7 +30,7 @@ import { Toaster } from 'react-hot-toast';
           <Route path="/Signup" element={<SignUp />} /> 
           <Route path="/About" element={<About />} /> 
           <Route path="/Contact" element={<Contact />} /> 
-         
+          <Route path="/Hrsection" element={<Hrsection />} />
          
           <Route path="/internship" element={<InternshipPage />} /> 
             
