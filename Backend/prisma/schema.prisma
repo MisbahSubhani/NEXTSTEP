@@ -12,11 +12,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       String @id @default(uuid())
-  name     String
-  email    String @unique
-  password String
+model Student {
+  id           String        @id @default(uuid())
+  username     String        @unique
+  name         String
+  email        String        @unique
+  password     String
+  applications Application[] // One student can apply to many internships
+  favorites    Favorite[] // One student can have many favorites
+}
+
+model HR {
+  id          String        @id @default(uuid())
+  username    String        @unique
+  name        String
+  email       String        @unique
+  password    String
+  internships Internships[] // One HR can create many internships
 }
 
 model Feedback {
@@ -26,13 +38,33 @@ model Feedback {
   message String
 }
 
+model Application {
+  id           String      @id @default(uuid())
+  studentId    String // Foreign key to Student
+  internshipId String // Foreign key to Internships
+  student      Student     @relation(fields: [studentId], references: [id]) // Relationship to Student
+  internship   Internships @relation(fields: [internshipId], references: [id]) // Relationship to Internships
+}
+
 model Internships {
-  id String @id @default(uuid())
-  company_name String
-  position String
-  location String
-  stipend Int
-  duration Int
+  id            String        @id @default(uuid())
+  company_name  String
+  position      String
+  location      String
+  stipend       Int
+  duration      Int
   starting_date DateTime
-  is_immediate Boolean @default(false)
+  is_immediate  Boolean       @default(false)
+  hrId          String // Foreign key to HR
+  hr            HR            @relation(fields: [hrId], references: [id]) // Relationship to HR
+  applications  Application[] // Many applications for this internship
+  favorites     Favorite[] // Many favorites for this internship
+}
+
+model Favorite {
+  id           String      @id @default(uuid())
+  studentId    String // Foreign key to Student
+  internshipId String // Foreign key to Internships
+  student      Student     @relation(fields: [studentId], references: [id]) // Relationship to Student
+  internship   Internships @relation(fields: [internshipId], references: [id]) // Relationship to Internships
 }
