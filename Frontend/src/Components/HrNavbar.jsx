@@ -4,13 +4,13 @@ import Nextlogo from "../assets/Nextlogo.jpeg";
 import { Link, useNavigate } from "react-router-dom";
 import { Profile } from "./Profile";
 const navItems = [
-  { text: "Applied Internships", href: "/" },
-  { text: "Available Internships", href: "/" },
+  { text: "Manage Internships", href: "/" },
+  { text: "Add Internships", href: "/" },
   { text: "Contact Us", href: "/contact" },
   
 ];
 
-export function DashboardNav() {
+export function HrNavbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -90,7 +90,7 @@ export function DashboardNav() {
           </div>
           <div className="flex ">
           <div className="   md:block mr-4 mt-4" >
-          <Profile/>
+          {/* <Profile/> */}
           </div>
           <button
             className="block mt-3 md:hidden text-white text-2xl focus:outline-none"

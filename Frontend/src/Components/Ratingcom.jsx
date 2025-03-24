@@ -2,53 +2,21 @@ import { Typography, Avatar, Rating } from "@material-tailwind/react";
  
 export function RatingWithComment() {
   return (
-    <div  className="flex flex-row   w-full flex flex-row justify-between pt-4  "
-     >
-    <div className="px-8 text-center "  >
-   
-      <Avatar
-        src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-        alt="image"
-        size="md" className="rounded-full border-black "
-      />
-      <Typography  variant="h6" className="mt-4 text-white">
-        Madhav Kashyap
-      </Typography>
-      <Typography color="gray" className="mb-4 font-normal text-zinc-100">
-       Intern at Microsoft
-      </Typography>
-      <Rating value={4} readonly />
+    <>
+      
+<form class="max-w-md mx-auto">   
+    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+    <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+        </div>
+        <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required />
+        <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
     </div>
-    <div className="px-8 text-center   ">
-   
-   <Avatar
-     src="https://plus.unsplash.com/premium_photo-1671656349218-5218444643d8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXZhdGFyfGVufDB8fDB8fHww"
-     alt="image"
-     size="md"  className="rounded-full"
-   />
-   <Typography variant="h6" className="mt-4  text-white  ">
-     Anuj Tiwari
-   </Typography>
-   <Typography color="gray" className="mb-4 font-normal  text-zinc-100">
-    Intern at OPPO
-   </Typography>
-   <Rating value={5} readonly />
- </div>
- <div className=" lg:px-8 text-center pt-4 " >
-   
-   <Avatar
-     src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YXZhdGFyfGVufDB8fDB8fHww"
-     alt="image"
-     size="md"   className="rounded-full"
-   />
-   <Typography variant="h6" className="mt-4  text-white" >
-      Aahna Panday
-   </Typography>
-   <Typography color="gray" className="mb-4 font-normal text-zinc-100">
-    Intern at Apple
-   </Typography>
-   <Rating   value={4} readonly />
- </div>
-    </div>
+</form>
+
+    </>
   );
 }

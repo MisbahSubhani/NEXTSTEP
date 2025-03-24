@@ -17,14 +17,14 @@ export function Navbarnew() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("authorization");
     setIsLoggedIn(!!token);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("authorization");
     setIsLoggedIn(false);
-    navigate("/signin");
+    navigate("/Login");
   };
 
   const renderNavItems = () => {
