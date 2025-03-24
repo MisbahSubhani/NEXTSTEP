@@ -6,7 +6,7 @@ import backendUrl from "../api";
 import { toast } from 'react-hot-toast';
 
 
-export function Signin() {
+export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -56,7 +56,7 @@ export function Signin() {
             }}
           ></div>
           <div className="w-full p-8 lg:w-1/2">
-            <p className="text-xl font-bold text-gray-600 text-center">Welcome back!</p>
+            <p className="text-xl font-bold text-gray-600 text-center">Welcome back students!</p>
             <div className="mt-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
               <input onChange={(e) => setEmail(e.target.value)}
@@ -82,7 +82,7 @@ export function Signin() {
             </div>
             <div className="mt-4 flex items-center w-full text-center">
               <a
-                href="/signup"
+                href="/SignUp"
                 className="font-bold text-xs text-gray-500 capitalize text-center w-full"
               >
                 Don&apos;t have any account yet?

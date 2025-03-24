@@ -21,7 +21,7 @@ export function SignUp() {
       });
 
       toast.success("Signup Successfully!");
-      navigate("/signin");
+      navigate("/Login");
     } catch (error) {
       console.log(error)
       toast.error("Signup failed!");
@@ -40,7 +40,7 @@ export function SignUp() {
             }}
           ></div>
           <div className="w-full p-8 lg:w-1/2">
-            <p className="text-xl font-bold text-gray-600 text-center">Create An Account!</p>
+            <p className="text-xl font-bold text-gray-600 text-center">Hello Students! Create An Account!</p>
 
             <div className="mt-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">Name</label>
@@ -96,7 +96,7 @@ export function SignUp() {
             </div>
 
             <div className="mt-4 flex items-center w-full text-center">
-              <a href="/signin" className="font-bold text-xs text-gray-500 capitalize text-center w-full">
+              <a href="/Login" className="font-bold text-xs text-gray-500 capitalize text-center w-full">
                 Have an account? <span className="font-bold text-blue-700">Login</span>
               </a>
             </div>
