@@ -17,7 +17,7 @@ export function HRLogin() {
     const credentials = { email, password };
     
     try {
-      const response = await axios.post(`http://${backendUrl}/student/login`, credentials, {
+      const response = await axios.post(`http://${backendUrl}/hr/login`, credentials, {
         headers: {
           'Content-Type': 'application/json',
         }
