@@ -1,14 +1,26 @@
-"use client";
 
 import { Avatar, Dropdown } from "flowbite-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import backendUrl from "../api";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export function Profile() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+  
+    useEffect(() => {
+      const token = localStorage.getItem("authorization");
+      setIsLoggedIn(!!token);
+    }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("authorization");
+    setIsLoggedIn(false);
+    navigate("/Login");
+  };
   useEffect(() => {
     const fetchProfile = async () => {
       const token = localStorage.getItem('authorization'); // Get token from localStorage
@@ -20,19 +32,23 @@ export function Profile() {
       }
 
       try {
-        const response = await axios.get('/profile', {
+        const response = await axios.get(`http://${backendUrl}/profile`, {
           headers: {
-            'Authorization': `Bearer ${token}` // Include token in Authorization header
+            'Authorization': token // Include token in Authorization header
           }
         });
         setUser(response.data);
       } catch (err) {
+        console.log("Error fetching profile:", err); // Debug log
         if (err.response) {
           setError(err.response.data?.error || err.message);
+        } else if (err.request) {
+          setError("No response received");
         } else {
-          setError("An unknown error occurred");
+          setError(err.message);
         }
-      } finally {
+      }
+      finally {
         setLoading(false);
       }
     };
@@ -59,16 +75,20 @@ export function Profile() {
       inline
     >
       <Dropdown.Header>
-        <span className="block text-sm">{user.name}</span>
+      <span className="block text-sm">
+                 Hii,  {user.name.charAt(0).toUpperCase() + user.name.slice(1)}
+                  </span>
         <span className="block truncate text-sm font-medium">{user.email}</span>
       </Dropdown.Header>
    
       <Dropdown.Item href="">My Profile</Dropdown.Item>
-      <Dropdown.Item href="/">Dashboard</Dropdown.Item>
-      <Dropdown.Item>Settings</Dropdown.Item>
+      <Dropdown.Item href="/">Resume Analysis</Dropdown.Item>
+      <Dropdown.Item>Change Password</Dropdown.Item>
       
       <Dropdown.Divider />
-      <Dropdown.Item>Sign out</Dropdown.Item>
+      <Dropdown.Item>
+   <button onClick={handleLogout}>Sign out</button>
+      </Dropdown.Item>
     </Dropdown>
   );
 }

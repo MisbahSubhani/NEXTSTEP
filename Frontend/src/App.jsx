@@ -11,6 +11,8 @@ import { HRLogin } from './pages/HRLogin';
 import { PostInternship } from "./pages/PostInternship";
 import { DashboardNav } from "./Components/DashboardNav";
 import { Dashboard } from "./pages/Dashboard";
+import { HrDashboard } from "./pages/HrDashboard";
+
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
           <Route path="/HR/Signup" element={<HRSignUp />} />
           <Route path="/HR/PostInternship" element={<PostInternship />} />
           <Route path="/HR/Login" element={<HRLogin />} />
+          <Route path="/HR/HrDashboard" element={<HrDashboard />} />
+          
 
         </Routes>
       </BrowserRouter>
