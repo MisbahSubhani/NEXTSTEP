@@ -11,9 +11,13 @@ export function Signin() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true); // Show Loader immediately
+  
     const credentials = { email, password };
     
     try {
@@ -24,28 +28,41 @@ export function Signin() {
       });
   
       localStorage.setItem("token", response.data.token);
-      
-      // ✅ Show Success Toast
+  
       toast.success('Login successful!');
   
-      // Redirect
-      navigate('/internship');
-      
+      // Keep loader for 3 sec before redirect
+      setTimeout(() => {
+        navigate('/internship');
+        setLoading(false);
+      }, 3000);
+  
     } catch (error) {
       console.log(import.meta.env.VITE_SERVER_URL);
   
-      // Display appropriate error toast
       if (error.response) {
         toast.error(error.response.data.message || "Invalid Credentials");
       } else {
         toast.error("An error occurred. Please try again.");
       }
+  
+      // Wait 3 sec before hiding loader even after failure
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
     }
   };
+  const Spinner = () => (
+    <div className="flex justify-center items-center mt-4">
+      <div className="w-6 h-6 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+    </div>
+  );
+  
   
 
   return (
     <>
+
       <Navbarnew />
       <div className="bg-gradient-to-r from-[#1c1a3b] via-[#903d37] to-[#903d37] flex items-center justify-center h-screen w-full px-5 sm:px-0">
         <div className="flex bg-white rounded-lg shadow-lg border overflow-hidden max-w-sm lg:max-w-4xl w-full">
@@ -77,8 +94,8 @@ export function Signin() {
             <div className="mt-8">
               {message && <p className="login-error">{message}</p>}
               <button onClick={handleLogin} className="bg-blue-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-blue-600">
-                Login
-              </button>
+  {loading ? <Spinner /> : 'Login'}
+</button>
             </div>
             <div className="mt-4 flex items-center w-full text-center">
               <a

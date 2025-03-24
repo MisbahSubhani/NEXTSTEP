@@ -11,13 +11,13 @@ export function Profile() {
       inline
     >
       <Dropdown.Header>
-        <span className="block text-sm">User Name</span>
+        <span className="block text-sm">Hi, Misbah</span>
         <span className="block truncate text-sm font-medium">user@gmail.com</span>
       </Dropdown.Header>
    
          
       <Dropdown.Item href="">My Profile</Dropdown.Item>
-      <Dropdown.Item href="/">Dashboard</Dropdown.Item>
+      <Dropdown.Item href="/">Resume Analysis</Dropdown.Item>
       <Dropdown.Item>Settings</Dropdown.Item>
       
       <Dropdown.Divider />

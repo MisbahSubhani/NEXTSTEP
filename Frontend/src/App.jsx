@@ -15,7 +15,7 @@ import {
   import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
 import { Toaster } from 'react-hot-toast';
-  
+import { Dashboard } from "./pages/Dashboard";
   function App() {
     return (
       <>
@@ -28,6 +28,7 @@ import { Toaster } from 'react-hot-toast';
           <Route path="/Signup" element={<SignUp />} /> 
           <Route path="/About" element={<About />} /> 
           <Route path="/Contact" element={<Contact />} /> 
+          <Route path="/dashboard" element={<Dashboard />} /> 
          
          
           <Route path="/internship" element={<InternshipPage />} /> 
