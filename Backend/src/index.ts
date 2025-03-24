@@ -171,12 +171,78 @@ const isHR = async (req: AuthRequest, res: Response, next: NextFunction) => {
     }
 };
 
-// Example: Protecting an HR-specific route
 //@ts-ignore
 app.get("/hr/dashboard", authenticateUser, isHR, async (req: AuthRequest, res: Response) => {
     res.json({ message: "Welcome to the HR Dashboard" });
 });
 
+
+//@ts-ignore
+app.post('/internships', authenticateUser, isHR, async (req: AuthRequest, res: Response) => {
+    const { company_name, position, location, stipend, duration, starting_date, is_immediate } = req.body;
+
+    if (!req.user) return res.status(401).json({ message: "Unauthorized" });
+
+    try {
+        // Create the internship
+        const internship = await prisma.internships.create({
+            data: {
+                company_name,
+                position,
+                location,
+                stipend,
+                duration,
+                starting_date,
+                is_immediate,
+                hr: { connect: { id: req.user.userId } }, // Associate the internship with the HR
+            },
+        });
+
+        res.status(201).json({ message: "Internship created successfully", internship });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(500).json({ error: error.message });
+        } else {
+            res.status(500).json({ error: "An unknown error occurred" });
+        }
+    }
+});
+
+//@ts-ignore
+app.delete('/internships', authenticateUser, isHR, async (req: AuthRequest, res: Response) => {
+    const { internshipId } = req.body; // Get the internship ID from the request body
+
+    if (!req.user) return res.status(401).json({ message: "Unauthorized" });
+
+    try {
+        // Find the internship to ensure it exists and belongs to the HR
+        const internship = await prisma.internships.findUnique({
+            where: { id: internshipId },
+        });
+
+        if (!internship) {
+            return res.status(404).json({ message: "Internship not found" });
+        }
+
+        // Check if the internship belongs to the HR making the request
+        if (internship.hrId !== req.user.userId) {
+            return res.status(403).json({ message: "You are not authorized to delete this internship" });
+        }
+
+        // Delete the internship
+        await prisma.internships.delete({
+            where: { id: internshipId },
+        });
+
+        res.json({ message: "Internship deleted successfully" });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            res.status(500).json({ error: error.message });
+        } else {
+            res.status(500).json({ error: "An unknown error occurred" });
+        }
+    }
+});
 
 //@ts-ignore
 app.post('/feedback', authenticateUser ,async (req: AuthRequest, res: Response) => {
