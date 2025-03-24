@@ -8,6 +8,9 @@ import { Contact } from "./pages/Contact";
 import { Toaster } from 'react-hot-toast';
 import { HRSignUp } from './pages/HRSignup';
 import { HRLogin } from './pages/HRLogin';
+import { PostInternship } from "./pages/PostInternship";
+import { DashboardNav } from "./Components/DashboardNav";
+import { Dashboard } from "./pages/Dashboard";
 
 function App() {
   return (
@@ -22,7 +25,9 @@ function App() {
           <Route path="/About" element={<About />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/Internship" element={<InternshipPage />} />
+          <Route path="/Dashboard" element={<Dashboard/>} />
           <Route path="/HR/Signup" element={<HRSignUp />} />
+          <Route path="/HR/PostInternship" element={<PostInternship />} />
           <Route path="/HR/Login" element={<HRLogin />} />
 
         </Routes>

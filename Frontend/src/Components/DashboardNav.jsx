@@ -1,81 +1,121 @@
-
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "flowbite-react";
-import Logo from "../assets/FinalLogo.png"
-import { Link } from "react-router-dom";
+import Nextlogo from "../assets/Nextlogo.jpeg";
+import { Link, useNavigate } from "react-router-dom";
 import { Profile } from "./Profile";
+const navItems = [
+  { text: "Applied Internships", href: "/" },
+  { text: "Available Internships", href: "/" },
+  { text: "Contact Us", href: "/contact" },
+  
+];
 
 export function DashboardNav() {
-const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
-  const navItems = [
-    
-    { text: "Home", href: "/" },
-    { text: "About Us", href: "/about" },
-    { text: "Contact Us", href: "/contact" },
-    { text: "LogOut", href: "/" }
+  const renderNavItems = () => {
+    const items = [];
 
-  ];
+    navItems.forEach((item) => {
+      items.push(
+        <Link key={item.href} to={item.href}>
+          <button className="mt-2 text-md hover:text-black">{item.text}</button>
+        </Link>
+      );
+    });
+    return items;
+  };
 
-  // Generate streak data
-
+  const renderSidebarNavItems = () => {
+    const items = [];
+    navItems.forEach((item) => {
+      items.push(
+        <Link
+          key={item.href}
+          to={item.href}
+          className="py-2 hover:underline text-left text-lg"
+          onClick={toggleSidebar}
+        >
+          {item.text}
+        </Link>
+      );
+      if (item.text === "Home" && isLoggedIn) {
+        items.push(
+          <Link
+            key="/profile"
+            to="/dashboard"
+            className="py-2 hover:underline text-left text-lg"
+            onClick={toggleSidebar}
+          >
+            Profile
+          </Link>
+        );
+      }
+    });
+    if (isLoggedIn) {
+      items.splice(
+        items.findIndex((item) => item.key === "/signup"),
+        1,
+        <button
+          key="logout-sidebar"
+          onClick={() => {
+            handleLogout();
+            toggleSidebar();
+          }}
+          className="py-2 hover:underline text-left text-lg"
+        >
+          Log Out
+        </button>
+      );
+    }
+    return items;
+  };
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-    return (
-         <div
-              className="bg-gradient-to-r from-[#1c1a3b] to-[#379090] "
-              // style={{
-              //   backgroundImage: "url('/img/hero-2.png')", // Background
-              //   backgroundSize: "cover",
-              //   backgroundPosition: "center",
-              //   paddingTop: 0,
-              //   marginTop: 0,
-              // }}
-            >
-              
-        
-              {/* Navigation items and logo */}
-            
-              <div className="flex justify-between items-center text-sm font-extrabold text-white px-5 pt-1 pb-4">
-                {/* Logo */}
-               <h1 className="text-xl ml-2 font-sans"> NextStep</h1>
-              
-                 <div className="ml-auto flex space-x-4 hidden md:flex pr-4 mt-4">
-             
-             <Link to="/">
-  <button className="mt-4 text-md hover:text-black">Home</button>
-</Link>
-            <Link to="/about">
-  <button className="mt-4 text-md hover:text-black">About</button>
-</Link>
+  return (
+    <div>
 
-<Link to="/contact">
-  <button className="mt-4 mr-8 text-md hover:text-black">Contact Us</button>
-</Link>
+      <div className="bg-gradient-to-r from-[#1c1a3b] to-[#379090]">
+        <div className="flex justify-between items-center text-sm font-extrabold text-white px-5 pt-1 pb-4">
+          <h1 className="text-xl">NextStep</h1>
+
+          <div className="ml-auto flex space-x-4 hidden md:flex pr-4 mt-4">
+            {renderNavItems()}
+       
+          </div>
+          <div className="flex ">
+          <div className="   md:block mr-4 mt-4" >
           <Profile/>
+          </div>
+          <button
+            className="block mt-3 md:hidden text-white text-2xl focus:outline-none"
+            onClick={toggleSidebar}
+          >
+            &#9776;
+          </button>
+          </div>
         </div>
-        
-        
-                {/* Desktop Navbar */}
-                <div className="hidden md:flex gap-5">
-                
-                </div>
-                <div  className=" flex flex-row-reverse w-24 md:hidden">
-              <Profile/>
-              </div>
-                
-              </div>
-             
-        
-              {/* Sidebar for Small Screens */}
-            
-        
-              {/* Spiderman image with wind effect */}
-           
-            </div>
-    )
+      </div>
+
+      <div
+        className={`fixed top-0 right-0 h-full bg-black text-white transform transition-transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"} w-2/3 z-50`}
+      >
+        <div className="flex flex-col h-full">
+          <button className="text-2xl self-end p-4" onClick={toggleSidebar}>
+            &times;
+          </button>
+                 
+          <nav className="flex flex-col gap-5 mt-10 px-5">
+            {renderSidebarNavItems()}
+          
+          </nav>
+        </div>
+      </div>
+    </div>
+  );
 }
