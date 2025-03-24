@@ -17,13 +17,13 @@ export function Signin() {
     const credentials = { email, password };
     
     try {
-      const response = await axios.post(`http://${backendUrl}/login`, credentials, {
+      const response = await axios.post(`http://${backendUrl}/student/login`, credentials, {
         headers: {
           'Content-Type': 'application/json',
         }
       });
   
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("authorization", response.data.token);
       
       // ✅ Show Success Toast
       toast.success('Login successful!');
