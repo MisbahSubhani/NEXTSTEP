@@ -118,18 +118,21 @@ app.post("/hr/login", async (req: Request, res: Response) => {
 });
 
 const authenticateUser = async (req: AuthRequest, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization;
+    const token = req.headers.authorization; // Ensure Bearer token format is handled
+
     if (!token) return res.status(401).json({ message: "Unauthorized" });
 
     try {
         //@ts-ignore
-        const decoded = jwt.verify(token, JWT_SECRET);
-        req.user = { userId: decoded.id }
+        const decoded = jwt.verify(token, JWT_SECRET); // Ensure correct typing
+        req.user = { userId: decoded.userId }; // Fix the assignment of userId
+        console.log("Authenticated user:", req.user); // Debugging log
         next();
-    } catch (error: unknown) {
+    } catch (error) {
         res.status(403).json({ message: "Invalid token" });
     }
 };
+
 
 //check if it is a student 
 //@ts-ignore
@@ -154,9 +157,30 @@ app.get('/profile', authenticateUser, async (req: AuthRequest, res: Response) =>
     }
 });
 
+const isHR = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    if (!req.user) return res.status(401).json({ message: "Unauthorized" });
+    console.log(req.user)
+    
+    try {
+        const hrUser = await prisma.hR.findUnique({ where: { id: req.user.userId } });
+        if (!hrUser) return res.status(403).json({ message: "Access denied" });
+        
+        next();
+    } catch (error: unknown) {
+        res.status(500).json({ error: "An unknown error occurred" });
+    }
+};
+
+// Example: Protecting an HR-specific route
+//@ts-ignore
+app.get("/hr/dashboard", authenticateUser, isHR, async (req: AuthRequest, res: Response) => {
+    res.json({ message: "Welcome to the HR Dashboard" });
+});
+
 
 //@ts-ignore
-app.post('/feedback', async (req: AuthRequest, res: Response) => {
+app.post('/feedback', authenticateUser ,async (req: AuthRequest, res: Response) => {
+    console.log(req.user);
     const { name, email, message } = req.body;
 
     try {
