@@ -15,7 +15,7 @@ export function InternshipPage() {
   // Fetch data
   useEffect(() => {
     setIsLoading(true);
-    fetch('/merged_jobs.csv')
+    fetch('/job.csv')
       .then(response => response.text())
       .then(csvText => {
         Papa.parse(csvText, {
@@ -23,8 +23,9 @@ export function InternshipPage() {
           skipEmptyLines: true,
           transformHeader: header => header.trim(),
           complete: (results) => {
-            setJobs(results.data);
-            setFilteredJobs(results.data);
+            const validJobs = results.data.filter(job => job.job_location && job.job_location.trim() !== '');
+            setJobs(validJobs);
+            setFilteredJobs(validJobs);
             setIsLoading(false);
           },
           error: () => {
@@ -39,7 +40,7 @@ export function InternshipPage() {
 
   // Filter & Search Logic
   useEffect(() => {
-    let tempJobs = jobs;
+    let tempJobs = jobs.filter(job => job.job_location && job.job_location.trim() !== '');
 
     if (searchQuery) {
       tempJobs = tempJobs.filter(job =>
@@ -76,8 +77,11 @@ export function InternshipPage() {
   const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
   const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
 
-  // Responsive job locations
-  const locations = [...new Set(jobs.map(job => job.job_location))].filter(Boolean);
+  // Responsive job locations - ensure no empty locations
+  const locations = [...new Set(jobs
+    .filter(job => job.job_location && job.job_location.trim() !== '')
+    .map(job => job.job_location)
+  )];
 
   return (
     <>
