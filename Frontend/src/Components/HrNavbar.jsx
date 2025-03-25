@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { HrProfile } from "./HrProfile";
 
 const navItems = [
+  { text: "Home", href: "/" },
   { text: "Manage Internships", href: "/" },
   { text: "Add Internships", href: "/" },
   { text: "Contact Us", href: "/contact" },

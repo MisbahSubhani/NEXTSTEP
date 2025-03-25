@@ -1,24 +1,27 @@
 import { useState } from "react";
 import axios from "axios";
 import { SyncLoader } from "react-spinners";
-import { toast } from 'react-hot-toast';
+import { toast } from "react-hot-toast";
+import backendUrl from "../api";
+import { useNavigate } from "react-router-dom";
 
 export function ResetPassword({ closeModal }) {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    
+
     if (newPassword.length < 6) {
       setError("New password must be at least 6 characters long!");
       return;
     }
-    
+
     if (newPassword !== confirmPassword) {
       setError("New password and confirm password do not match!");
       return;
@@ -28,32 +31,64 @@ export function ResetPassword({ closeModal }) {
 
     try {
       const token = localStorage.getItem("authorization");
-
+      const isHR = window.location.pathname.includes("/HR/HrDashboard");
+      const apiEndpoint = isHR ? "/hr/changePassword" : "/student/changePassword";
+      const redirectPath = isHR ? "/hr/login" : "/login";
+    
+      // Start the loading spinner
+      setLoading(true);
+      
+      // Store the start time
+      const startTime = Date.now();
+    
       const response = await axios.post(
-        "http://backendUrl/resetpassword",
+        `http://${backendUrl}${apiEndpoint}`,
         { currentPassword, newPassword },
-        {
-          headers: { Authorization: token },
-        }
+        { headers: { Authorization: token } }
       );
-
+    
+      // Calculate remaining time to ensure total 3 seconds loading
+      const elapsedTime = Date.now() - startTime;
+      const remainingTime = Math.max(3000 - elapsedTime, 0);
+    
+      // Wait for remaining time
+      await new Promise(resolve => setTimeout(resolve, remainingTime));
+    
+      // Show success toast
       toast.success("Password changed successfully!");
-      setTimeout(() => closeModal(), 1000);
+    
+      // Close modal and redirect after toast is shown (about 3 seconds)
+      setTimeout(() => {
+        closeModal();
+        navigate(redirectPath);
+      }, 2000);
+    
     } catch (err) {
+      setLoading(false);
       console.error("Error resetting password:", err);
-      const errorMessage = err.response?.data?.error || "Something went wrong!";
+      const errorMessage =
+        err.response?.data?.message === "Current password is incorrect"
+          ? "Current password is incorrect!"
+          : err.response?.data?.error || "Something went wrong!";
       setError(errorMessage);
       toast.error(errorMessage);
-    } finally {
+    }finally {
       setLoading(false);
     }
   };
 
   return (
     <>
-    
-      
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 backdrop-blur-sm">
+      {/* Full-screen loader with blur background */}
+      {loading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+          <div className="p-6 bg-white bg-opacity-90 rounded-lg shadow-xl">
+            <SyncLoader size={15} color="#3b82f6" />
+          </div>
+        </div>
+      )}
+
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40 backdrop-blur-sm">
         <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md relative mx-4">
           <button
             onClick={closeModal}
@@ -64,7 +99,6 @@ export function ResetPassword({ closeModal }) {
 
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800">Change Password</h2>
-            
           </div>
 
           {error && (
@@ -87,7 +121,7 @@ export function ResetPassword({ closeModal }) {
                 required
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 New Password
@@ -101,7 +135,7 @@ export function ResetPassword({ closeModal }) {
                 required
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Confirm Password
@@ -121,11 +155,7 @@ export function ResetPassword({ closeModal }) {
               className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors flex justify-center items-center font-medium shadow-md hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
               disabled={loading}
             >
-              {loading ? (
-                <SyncLoader size={8} color="#fff" />
-              ) : (
-                "Reset Password"
-              )}
+              Reset Password
             </button>
           </form>
         </div>
