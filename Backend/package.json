@@ -4,17 +4,17 @@
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
-  "start": "bun run index.ts",
-  "start-with-migration": "bunx prisma migrate deploy && bun run index.ts"
-}
-,
+    "start": "bun run index.ts",
+    "start-with-migration": "bunx prisma migrate deploy && bun run index.ts"
+  },
   "dependencies": {
     "@prisma/client": "^5.14.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.0"
+    "jsonwebtoken": "^9.0.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
