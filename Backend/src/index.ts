@@ -1,8 +1,10 @@
+
 import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/authRoutes";
 import hrRoutes from "./routes/hrRoutes";
 import studentRoutes from "./routes/studentRoutes";
+import profileRoutes from "./routes/profileRoutes";
 
 const app = express();
 
@@ -13,5 +15,6 @@ app.use(cors());
 app.use(authRoutes);
 app.use(hrRoutes);
 app.use(studentRoutes);
+app.use(profileRoutes);
 
 app.listen(3001, () => console.log("Server running on port 3001"));
