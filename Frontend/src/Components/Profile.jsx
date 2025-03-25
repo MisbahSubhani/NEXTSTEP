@@ -32,7 +32,7 @@ export function Profile() {
       }
 
       try {
-        const response = await axios.get(`http://${backendUrl}/profile`, {
+        const response = await axios.get(`http://${backendUrl}/student/profile`, {
           headers: {
             'Authorization': token // Include token in Authorization header
           }
