@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button } from "flowbite-react";
 import Nextlogo from "../assets/Nextlogo.jpeg";
 import { Link, useNavigate } from "react-router-dom";
-import { Profile } from "./Profile";
+import { HrProfile } from "./HrProfile";
+
 const navItems = [
   { text: "Manage Internships", href: "/" },
   { text: "Add Internships", href: "/" },
@@ -89,9 +90,9 @@ export function HrNavbar() {
        
           </div>
           <div className="flex ">
-          <div className="   md:block mr-4 mt-4" >
-          {/* <Profile/> */}
-          </div>
+                   <div className="   md:block mr-4 mt-4" >
+                   <HrProfile/>
+                   </div>
           <button
             className="block mt-3 md:hidden text-white text-2xl focus:outline-none"
             onClick={toggleSidebar}
