@@ -4,6 +4,7 @@ import { Navbarnew } from "../Components/Navbarnew";
 import Githublogo from "../assets/Github.png";
 import backendUrl from "../api";
 import { toast } from "react-hot-toast"
+import axios from "axios";
 export function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,28 +20,25 @@ export function Contact() {
     setSuccess(null);
 
     try {
-      const response = await fetch(`http://${backendUrl}/feedback`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, message }),
+      const response = await axios.post(`http://${backendUrl}/feedback`, {
+        name,
+        email,
+        message,
+      }, {
+        headers: { "Content-Type": "application/json" }
       });
-
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.message || "Something went wrong");
-
+    
       toast.success("Message sent successfully!");
       setName("");
       setEmail("");
       setMessage("");
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
-  };
-
+    
+  }
   return (
     <div
       className="flex flex-col md:min-h-screen justify-between overflow-auto"
