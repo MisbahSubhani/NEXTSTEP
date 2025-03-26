@@ -5,7 +5,7 @@ import authRoutes from "./routes/authRoutes";
 import hrRoutes from "./routes/hrRoutes";
 import studentRoutes from "./routes/studentRoutes";
 import profileRoutes from "./routes/profileRoutes";
-import feedbackRoutes from "./routes/feedbackRoute";
+import feedbackRoutes from "./routes/feedbackRoutes";
 
 const app = express();
 
