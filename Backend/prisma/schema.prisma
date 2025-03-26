@@ -55,6 +55,7 @@ model Internships {
   duration      Int
   starting_date DateTime
   is_immediate  Boolean       @default(false)
+  created_at     DateTime @default(now())
   hrId          String // Foreign key to HR
   hr            HR            @relation(fields: [hrId], references: [id]) // Relationship to HR
   applications  Application[] // Many applications for this internship
