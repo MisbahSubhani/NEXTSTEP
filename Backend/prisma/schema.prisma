@@ -44,6 +44,8 @@ model Application {
   internshipId String // Foreign key to Internships
   student      Student     @relation(fields: [studentId], references: [id]) // Relationship to Student
   internship   Internships @relation(fields: [internshipId], references: [id]) // Relationship to Internships
+
+  @@unique([studentId, internshipId]) // Enforce unique constraint on studentId and internshipId
 }
 
 model Internships {
@@ -68,4 +70,6 @@ model Favorite {
   internshipId String // Foreign key to Internships
   student      Student     @relation(fields: [studentId], references: [id]) // Relationship to Student
   internship   Internships @relation(fields: [internshipId], references: [id]) // Relationship to Internships
+
+  @@unique([studentId, internshipId]) // Enforce unique constraint on studentId and internshipId
 }
