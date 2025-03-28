@@ -6,6 +6,7 @@ import hrRoutes from "./routes/hrRoutes";
 import studentRoutes from "./routes/studentRoutes";
 import profileRoutes from "./routes/profileRoutes";
 import feedbackRoutes from "./routes/feedbackRoutes";
+import internshipRoutes from "./routes/internshipRoutes";
 
 const app = express();
 
@@ -18,5 +19,6 @@ app.use(hrRoutes);
 app.use(studentRoutes);
 app.use(profileRoutes);
 app.use(feedbackRoutes);
+app.use(internshipRoutes);
 
 app.listen(3001, () => console.log("Server running on port 3001"));
