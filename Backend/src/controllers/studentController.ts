@@ -101,6 +101,10 @@ export const getAppliedInternships: RequestHandler = async (
 
         if (!user) return res.status(404).json({ message: "User not found" });
 
+        const count = await prisma.application.count({
+            where: { studentId: user.id }
+        })
+
         const appliedInternships = await prisma.application.findMany({
             where: { studentId: user.id },
             select: { internshipId: true }
@@ -109,7 +113,7 @@ export const getAppliedInternships: RequestHandler = async (
         const internshipIds = appliedInternships.map(app => app.internshipId);
         const internshipDetails = await getInternshipDetailsFromIds(internshipIds);
 
-        res.status(200).json({ appliedInternships: internshipDetails });
+        res.status(200).json({ count: count, appliedInternships: internshipDetails });
     } catch (error) {
         res.status(500).json({ error: "An unknown error occurred" });
     }
@@ -129,6 +133,10 @@ export const getFavoriteInternships: RequestHandler = async (
 
         if (!user) return res.status(404).json({ message: "User not found" });
 
+        const count = await prisma.favorite.count({
+            where: { studentId: user.id }
+        })
+
         const favoriteInternships = await prisma.favorite.findMany({
             where: { studentId: user.id },
             select: { internshipId: true }
@@ -137,7 +145,7 @@ export const getFavoriteInternships: RequestHandler = async (
         const internshipIds = favoriteInternships.map(fav => fav.internshipId);
         const internshipDetails = await getInternshipDetailsFromIds(internshipIds);
 
-        res.status(200).json({ favoriteInternships: internshipDetails });
+        res.status(200).json({ count: count, favoriteInternships: internshipDetails });
     } catch (error) {
         res.status(500).json({ error: "An unknown error occurred" });
     }
@@ -145,6 +153,6 @@ export const getFavoriteInternships: RequestHandler = async (
 
 async function getInternshipDetailsFromIds(internshipIds: string[]) {
     return await prisma.internships.findMany({
-        where: { id: { in: internshipIds } } 
+        where: { id: { in: internshipIds } }
     });
 }
