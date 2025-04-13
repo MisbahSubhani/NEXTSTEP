@@ -72,8 +72,11 @@ export function Profile() {
           <span className="block truncate text-sm font-medium">{user.email}</span>
         </Dropdown.Header>
 
-        <Dropdown.Item href="">My Profile</Dropdown.Item>
-        <Dropdown.Item href="/">Resume Analysis</Dropdown.Item>
+        <a href="http://localhost:8501/" target="_blank" rel="noopener noreferrer">
+  <Dropdown.Item>Resume Analysis</Dropdown.Item>
+</a>
+
+
         <Dropdown.Item onClick={() => setIsModalOpen(true)}>Change Password</Dropdown.Item>
 
         <Dropdown.Divider />

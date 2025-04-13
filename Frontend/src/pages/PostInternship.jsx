@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import { Navbarnew } from "../Components/Navbarnew";
 
 export const PostInternship = () => {
@@ -8,38 +9,58 @@ export const PostInternship = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
-  const [currency, setCurrency] = useState("INR"); // Default to INR
-  const conversionRate = 83; // 1 USD = 83 INR (example rate)
 
-  // Function to convert USD to INR before submission
+  const [currency, setCurrency] = useState("INR");
+  const conversionRate = 83;
+
   const convertToINR = (stipend, currency) => {
     if (currency === "USD") {
       return stipend * conversionRate;
     }
-    return stipend; // If INR, return as is
+    return stipend;
   };
 
-  const onSubmit = (data) => {
-    // Convert stipend if USD is selected
+  const onSubmit = async (data) => {
     const convertedStipend = convertToINR(parseFloat(data.stipend), currency);
 
     const formData = {
       ...data,
-      stipend: convertedStipend, // Store converted INR value
-      currency, // Keep track of original currency selection
+      stipend: convertedStipend,
+      currency,
+      is_immediate: Boolean(data.is_immediate),
+      duration: parseInt(data.duration),
+      starting_date: new Date(data.starting_date).toISOString(),
     };
 
-    console.log("Form Submitted:", formData);
-    // Send formData to backend API
+    try {
+      const token = localStorage.getItem("authorization"); // make sure this is set after HR logs in
+
+      if (!token) {
+        alert("No token found. Please login again.");
+        return;
+      }
+
+      const response = await axios.post(
+        "http://localhost:3001/hr/postInternship",
+        formData,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      console.log("Internship posted:", response.data);
+      alert("Internship posted successfully!");
+    } catch (error) {
+      console.error("Error posting internship:", error);
+      alert("Error posting internship: " + error.response?.data?.message || error.message);
+    }
   };
 
   return (
     <>
-      {/* Navbar Positioned Correctly */}
       <Navbarnew />
-
-      {/* Internship Form Container */}
       <div className="max-w-lg mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
         <h2 className="text-2xl font-bold mb-4 text-center">Post an Internship</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -73,7 +94,6 @@ export const PostInternship = () => {
             {errors.location && <p className="text-red-500">{errors.location.message}</p>}
           </div>
 
-          {/* Stipend Section with Currency Selection */}
           <div>
             <label className="block font-semibold">Stipend</label>
             <div className="flex">
@@ -116,15 +136,14 @@ export const PostInternship = () => {
           </div>
 
           <div className="flex items-center">
-            <input
-              type="checkbox"
-              {...register("is_immediate")}
-              className="mr-2"
-            />
+            <input type="checkbox" {...register("is_immediate")} className="mr-2" />
             <label className="font-semibold">Immediate Start</label>
           </div>
 
-          <button type="submit" className="w-full p-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          <button
+            type="submit"
+            className="w-full p-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
             Post Internship
           </button>
         </form>

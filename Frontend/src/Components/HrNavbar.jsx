@@ -7,7 +7,7 @@ import { HrProfile } from "./HrProfile";
 const navItems = [
   { text: "Home", href: "/" },
   { text: "Manage Internships", href: "/" },
-  { text: "Add Internships", href: "/" },
+  { text: "Add Internships", href: "/HR/PostInternship" },
   { text: "Contact Us", href: "/contact" },
   
 ];

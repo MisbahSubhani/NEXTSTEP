@@ -23,6 +23,7 @@
     "gsap": "^3.12.7",
     "intern": "file:",
     "link": "^2.1.1",
+    "lucide-react": "^0.487.0",
     "papaparse": "^5.5.2",
     "pdfjs-dist": "^3.5.141",
     "react": "^18.3.1",
