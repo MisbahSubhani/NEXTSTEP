@@ -13,14 +13,18 @@ datasource db {
 }
 
 model Student {
-  id           String        @id @default(uuid())
-  username     String        @unique
-  name         String
-  email        String        @unique
-  password     String
-  applications Application[] // One student can apply to many internships
-  favorites    Favorite[] // One student can have many favorites
+  id              String        @id @default(uuid())
+  username        String        @unique
+  name            String
+  email           String        @unique
+  password        String
+  applications    Application[] // One student can apply to many internships
+  favorites       Favorite[]    // One student can have many favorites
+
+  lastLoginDate   DateTime?     // 🕒 Tracks the last login date
+  streakCount     Int           @default(0) // 🔥 Tracks the streak
 }
+
 
 model HR {
   id          String        @id @default(uuid())
