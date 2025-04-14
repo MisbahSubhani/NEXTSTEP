@@ -33,6 +33,7 @@
     "react-hot-toast": "^2.5.2",
     "react-router-dom": "^6.28.2",
     "react-spinners": "^0.15.0",
+    "sonner": "^2.0.3",
     "tw-elements-react": "^1.0.0-alpha-end"
   },
   "devDependencies": {

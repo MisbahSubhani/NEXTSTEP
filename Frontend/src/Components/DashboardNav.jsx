@@ -6,6 +6,7 @@ import { Profile } from "./Profile";
 const navItems = [
 
   { text: "Help", href: "/contact" },
+  { text: "Internships", href: "/internship" },
   
 ];
 

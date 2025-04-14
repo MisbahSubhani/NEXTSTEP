@@ -30,7 +30,7 @@ export function Login() {
 
       setTimeout(() => {
         setLoading(false);
-        navigate('/internship');
+        navigate('/dashboard');
       }, 2000);
 
     } catch (error) {

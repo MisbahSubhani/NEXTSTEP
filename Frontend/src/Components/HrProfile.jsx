@@ -72,7 +72,7 @@ export function HrProfile() {
           <span className="block truncate text-sm font-medium">{user.email}</span>
         </Dropdown.Header>
 
-        <Dropdown.Item>My Profile</Dropdown.Item>
+     
         <Dropdown.Item href="/">Resume Analysis</Dropdown.Item>
         <Dropdown.Item onClick={() => setShowResetPassword(true)}>
           Change Password

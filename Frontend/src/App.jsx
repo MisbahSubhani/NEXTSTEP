@@ -12,6 +12,8 @@ import { PostInternship } from "./pages/PostInternship";
 import { DashboardNav } from "./Components/DashboardNav";
 import { Dashboard } from "./pages/Dashboard";
 import { HrDashboard } from "./pages/HrDashboard";
+import { EditInternship } from "./pages/EditInternship";
+
 
 
 function App() {
@@ -30,8 +32,11 @@ function App() {
           <Route path="/Dashboard" element={<Dashboard/>} />
           <Route path="/HR/Signup" element={<HRSignUp />} />
           <Route path="/HR/PostInternship" element={<PostInternship />} />
+          <Route path="/HR/EditInternship/:id" element={<EditInternship />} />
           <Route path="/HR/Login" element={<HRLogin />} />
+       
           <Route path="/HR/HrDashboard" element={<HrDashboard />} />
+    
           
 
         </Routes>

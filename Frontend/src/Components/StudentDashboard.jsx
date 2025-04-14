@@ -3,10 +3,13 @@ import axios from 'axios';
 import backendUrl from '../api';
 import toast from 'react-hot-toast';
 import DidYouKnowCard from './DoyouKnow';
-import { Edit2, User, GraduationCap, Mail, Phone, Calendar,Clock,FileText, Search, ChevronLeft, ChevronRight, Heart, Loader2, Briefcase, Bookmark, CheckCircle } from 'lucide-react';
+import { Edit2, User, GraduationCap, MapPin, Phone, Calendar,Clock,FileText, Search, ChevronLeft, ChevronRight, Heart, Loader2, Briefcase, Bookmark, CheckCircle } from 'lucide-react';
 import { FooterSection } from './FooterSection';
 import StreakCounter from './StreakCounter';
 import { HRTipsCarousel } from './HRTipsCarousel';
+import { StatusDisplay } from './StatusUpdater';
+import { NoticesList } from './NoticesList';
+
 
 
 export function StudentDashboard() {
@@ -171,7 +174,7 @@ export function StudentDashboard() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-[#3A4B48] to-[#163342] relative">
+        <div className="min-h-screen  relative overflow-x-hidden">
        
             {isApplying && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center">
@@ -224,22 +227,24 @@ export function StudentDashboard() {
                         </div>
               
                         {/* Did You Know Card at the bottom */}
+                        <StatusDisplay/>
                         <StreakCounter/>
                         <DidYouKnowCard />
                         
                     </div>
-
+                  
                     {/* Right Side - Internships List */}
                     <div className="lg:col-span-2">
-
+                     
+             
                         <div className="bg-white rounded-xl shadow-md p-6">
                             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                                <div className="flex items-center space-x-4">
+                                <div className="flex flex-col w-full sm:w-auto sm:flex-row sm:items-center gap-4">
                                     <h2 className="text-2xl font-bold text-gray-800">
                                         {activeTab === 'available' ? 'Available Internships' : 
                                          activeTab === 'applied' ? 'Applied Internships' : 'Favorite Internships'}
                                     </h2>
-                                    <div className="flex border rounded-lg overflow-hidden">
+                                    <div className="flex border rounded-lg overflow-x-auto w-86 justify-center mr-8 md:">
                                         <button
                                             className={`px-3 py-1 text-sm ${activeTab === 'available' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`}
                                             onClick={() => {
@@ -317,11 +322,26 @@ export function StudentDashboard() {
                                                     <div className="w-10 h-10 rounded-md bg-blue-100 flex items-center justify-center">
                                                         <span className="text-xl font-medium text-blue-600">{internship.company_name[0]}</span>
                                                     </div>
-                                                    <div>
-                                                        <h3 className="text-lg sm:text-xl font-semibold text-gray-800">{internship.position}</h3>
-                                                        <p className="text-sm text-gray-600">{internship.company_name}</p>
-                                                        <p className="text-sm text-gray-600">{internship.location}</p>
-                                                    </div>
+                                                    <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+  <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">{internship.position}</h3>
+  <p className="text-sm text-gray-700 mb-2">{internship.company_name}</p>
+  
+  <div className="flex items-center gap-2 mb-2 text-sm text-gray-600">
+    <MapPin className="h-4 w-4 text-gray-500" />
+    <span>{internship.location}</span>
+  </div>
+  
+  <div className="flex items-center gap-2 mb-2 text-sm text-gray-600">
+    <Calendar className="h-4 w-4 text-gray-500" />
+    <span>Starting Date: {new Date(internship.starting_date).toLocaleDateString()}</span>
+  </div>
+  
+  <div className="flex items-center gap-2 text-sm text-gray-600">
+    <Clock className="h-4 w-4 text-gray-500" />
+    <span>Deadline: {new Date(internship.deadline).toLocaleDateString()}</span>
+  </div>
+</div>
+
                                                 </div>
 
                                                 <div className="text-sm text-gray-600 mt-2">
@@ -414,6 +434,7 @@ export function StudentDashboard() {
                             )}
                         </div>
                        <div className='mt-8'> <HRTipsCarousel/> </div>
+                       <div className='mt-8'> <NoticesList/> </div>
                     </div>
                    
                 </div>
