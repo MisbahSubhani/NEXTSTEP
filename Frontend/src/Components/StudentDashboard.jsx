@@ -239,7 +239,7 @@ export function StudentDashboard() {
                     <div className="lg:col-span-2">
                      
              
-                    <div className="bg-white rounded-xl shadow-md p-6 ref={internshipsRef} ">
+                    <div className="bg-white rounded-xl shadow-md p-6 ">
     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div className="flex flex-col w-full sm:w-auto sm:flex-row sm:items-center gap-4">
             <h2 className="text-2xl font-bold text-gray-800">
@@ -408,40 +408,52 @@ export function StudentDashboard() {
     </div>
 
     {currentInternships.length > internshipsPerPage && (
-        <div className="flex justify-between items-center mt-6">
+    <div className="flex justify-between items-center mt-6">
         <button
-  className="px-3 py-1 sm:px-4 sm:py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50 flex items-center"
-  onClick={() => {
-    setCurrentPage(prev => prev - 1);
-    setTimeout(() => {
-      internshipsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 0);
-  }}
-  disabled={currentPage === 1}
->
-  <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 mr-1" />
-  <span className="hidden sm:inline">Previous</span>
-</button>
-
-            <span className="text-sm text-gray-500">
-                Page {currentPage} of {totalPages}
-            </span>
-            <button
-  className="px-3 py-1 sm:px-4 sm:py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50 flex items-center"
-  onClick={() => {
-    setCurrentPage(prev => prev + 1);
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 0);
-  }}
-  disabled={currentPage === totalPages}
->
-  <span className="hidden sm:inline">Next</span>
-  <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 ml-1" />
-</button>
-
-        </div>
-    )}
+            className="px-3 py-1 sm:px-4 sm:py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50 flex items-center"
+            onClick={() => {
+                setCurrentPage(prev => prev - 1);
+                setTimeout(() => {
+                    const firstCard = document.querySelector('#internships-container > div:first-child');
+                    if (firstCard) {
+                        firstCard.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }, 0);
+            }}
+            disabled={currentPage === 1}
+        >
+            <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5 mr-1" />
+            <span className="hidden sm:inline">Previous</span>
+        </button>
+        
+        <span className="text-sm text-gray-500">
+            Page {currentPage} of {totalPages}
+        </span>
+        
+        <button
+            className="px-3 py-1 sm:px-4 sm:py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50 flex items-center"
+            onClick={() => {
+                setCurrentPage(prev => prev + 1);
+                setTimeout(() => {
+                    const firstCard = document.querySelector('#internships-container > div:first-child');
+                    if (firstCard) {
+                        firstCard.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }, 0);
+            }}
+            disabled={currentPage === totalPages}
+        >
+            <span className="hidden sm:inline">Next</span>
+            <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 ml-1" />
+        </button>
+    </div>
+)}
 </div>
 
                        <div className='mt-8'> <HRTipsCarousel/> </div>
