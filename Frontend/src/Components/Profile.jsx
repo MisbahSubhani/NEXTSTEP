@@ -35,7 +35,7 @@ export function Profile() {
       }
 
       try {
-        const response = await axios.get(`https://${backendUrl}/student/profile`, {
+        const response = await axios.get(`${backendUrl}/student/profile`, {
           headers: { Authorization: token },
         });
         setUser(response.data);
@@ -72,7 +72,7 @@ export function Profile() {
           <span className="block truncate text-sm font-medium">{user.email}</span>
         </Dropdown.Header>
 
-        <a href="http://localhost:8501/" target="_blank" rel="noopener noreferrer">
+        <a href="https://resume-analysis-run.streamlit.app/" target="_blank" rel="noopener noreferrer">
   <Dropdown.Item>Resume Analysis</Dropdown.Item>
 </a>
 

@@ -45,7 +45,7 @@ export function EditInternship() {
         }
 
         const response = await axios.get(
-          `http://${backendUrl}/hr/internship/${id}`,
+          `${backendUrl}/hr/internship/${id}`,
           {
             headers: { Authorization: token },
           }
@@ -116,7 +116,7 @@ export function EditInternship() {
       }
 
       await axios.put(
-        `https://${backendUrl}/hr/internship/${id}`,
+        `${backendUrl}/hr/internship/${id}`,
         updatedInternship,
         {
           headers: { Authorization: token },

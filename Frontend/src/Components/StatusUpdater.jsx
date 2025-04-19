@@ -22,7 +22,7 @@ export function StatusDisplay() {
           return;
         }
 
-        const response = await axios.get(`https://${backendUrl}/applications`, {
+        const response = await axios.get(`${backendUrl}/applications`, {
           headers: {
             Authorization: token,
           },

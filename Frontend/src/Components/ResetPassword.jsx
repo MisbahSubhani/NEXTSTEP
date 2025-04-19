@@ -42,7 +42,7 @@ export function ResetPassword({ closeModal }) {
       const startTime = Date.now();
     
       const response = await axios.post(
-        `https://${backendUrl}${apiEndpoint}`,
+        `${backendUrl}${apiEndpoint}`,
         { currentPassword, newPassword },
         { headers: { Authorization: token } }
       );

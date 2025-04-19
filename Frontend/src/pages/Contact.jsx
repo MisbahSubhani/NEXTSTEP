@@ -20,7 +20,7 @@ export function Contact() {
     setSuccess(null);
 
     try {
-      const response = await axios.post(`https://${backendUrl}/feedback`, {
+      const response = await axios.post(`${backendUrl}/feedback`, {
         name,
         email,
         message,
