@@ -35,7 +35,7 @@ export function HrProfile() {
       }
 
       try {
-        const response = await axios.get(`http://${backendUrl}/Hr/profile`, {
+        const response = await axios.get(`https://${backendUrl}/Hr/profile`, {
           headers: { Authorization: token },
         });
         setUser(response.data);

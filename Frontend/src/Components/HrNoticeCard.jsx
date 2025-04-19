@@ -34,7 +34,7 @@ const HrNoticeCard = () => {
     setLoadingNotices(true);
     try {
       const token = localStorage.getItem("authorization");
-      const res = await axios.get(`http://${backendUrl}/notices/hr`, {
+      const res = await axios.get(`https://${backendUrl}/notices/hr`, {
         headers: { authorization: token },
       });
       setNotices(res.data.notices);
@@ -55,7 +55,7 @@ const HrNoticeCard = () => {
     try {
       const token = localStorage.getItem("authorization");
       await axios.post(
-        `http://${backendUrl}/notice`,
+        `https://${backendUrl}/notice`,
         { title, message },
         { headers: { authorization: token } }
       );
@@ -78,7 +78,7 @@ const HrNoticeCard = () => {
     
 
     try {
-      const url = `http://${backendUrl}/notice/${id}`; // Ensure id is passed here
+      const url = `https://${backendUrl}/notice/${id}`; // Ensure id is passed here
       console.log("Deleting notice from:", url); // debug log
 
       const token = localStorage.getItem("authorization");

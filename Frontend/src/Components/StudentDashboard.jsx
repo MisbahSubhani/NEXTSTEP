@@ -32,20 +32,20 @@ export function StudentDashboard() {
                 const token = localStorage.getItem("authorization");
                 
                 // Fetch internships
-                const internshipsRes = await axios.get(`http://${backendUrl}/getinternships`);
+                const internshipsRes = await axios.get(`https://${backendUrl}/getinternships`);
                 const sortedInternships = internshipsRes.data.internships?.sort((a, b) => 
                     new Date(b.created_at) - new Date(a.created_at)
                 ) || [];
                 setInternships(sortedInternships);
 
                 // Fetch applied internships
-                const appliedRes = await axios.get(`http://${backendUrl}/student/getAppliedInternships`, {
+                const appliedRes = await axios.get(`https://${backendUrl}/student/getAppliedInternships`, {
                     headers: { 'Authorization': token }
                 });
                 setAppliedInternships(appliedRes.data.appliedInternships || []);
 
                 // Fetch favorite internships
-                const favoritesRes = await axios.get(`http://${backendUrl}/student/getFavoriteInternships`, {
+                const favoritesRes = await axios.get(`https://${backendUrl}/student/getFavoriteInternships`, {
                     headers: { 'Authorization': token }
                 });
                 setFavoriteInternships(favoritesRes.data.favoriteInternships || []);
@@ -144,14 +144,14 @@ export function StudentDashboard() {
             const isCurrentlyFavorite = favoriteInternships.some(fav => fav.id === internshipId);
             
             if (isCurrentlyFavorite) {
-                await axios.delete(`http://${backendUrl}/student/favoriteinternship/${internshipId}`, {
+                await axios.delete(`https://${backendUrl}/student/favoriteinternship/${internshipId}`, {
                     headers: { 'Authorization': token }
                 });
                 setFavoriteInternships(prev => prev.filter(fav => fav.id !== internshipId));
                 toast.success('Removed from favorites');
             } else {
                 const response = await axios.post(
-                    `http://${backendUrl}/student/favorite`,
+                    `https://${backendUrl}/student/favorite`,
                     { internshipId },
                     { headers: { 'Authorization': token } }
                 );

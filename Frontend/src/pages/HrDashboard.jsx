@@ -22,7 +22,7 @@ export function HrDashboard() {
   const getInternships = async () => {
     const token = localStorage.getItem("authorization");
     try {
-      const response = await axios.get(`http://${backendUrl}/hr/internships`, {
+      const response = await axios.get(`https://${backendUrl}/hr/internships`, {
         headers: { authorization: token },
       });
       setInternships(response.data.internships || []);
@@ -38,7 +38,7 @@ export function HrDashboard() {
   const deleteInternship = async (id) => {
     const token = localStorage.getItem("authorization");
     try {
-      const response = await axios.delete(`http://${backendUrl}/hr/deleteInternship/${id}`, {
+      const response = await axios.delete(`https://${backendUrl}/hr/deleteInternship/${id}`, {
         headers: { authorization: token },
       });
       setInternships(internships.filter((item) => item.id !== id));

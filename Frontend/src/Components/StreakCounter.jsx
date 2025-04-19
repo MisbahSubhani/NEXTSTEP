@@ -13,7 +13,7 @@ export default function StreakCounter() {
     const fetchStreakData = async () => {
       try {
         const token = localStorage.getItem("authorization");
-        const response = await axios.get(`http://${backendUrl}/student/streak`, {
+        const response = await axios.get(`https://${backendUrl}/student/streak`, {
           headers: { 'Authorization': token }
         });
         

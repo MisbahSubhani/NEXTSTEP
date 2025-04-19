@@ -35,7 +35,7 @@ export function Profile() {
       }
 
       try {
-        const response = await axios.get(`http://${backendUrl}/student/profile`, {
+        const response = await axios.get(`https://${backendUrl}/student/profile`, {
           headers: { Authorization: token },
         });
         setUser(response.data);

@@ -18,7 +18,7 @@ export function HRSignUp() {
   const handleSignup = async () => {
     setLoading(true); // Show loader
     try {
-      const response = await axios.post(`http://${backendUrl}/hr/signup`, {
+      const response = await axios.post(`https://${backendUrl}/hr/signup`, {
         name,
         email,
         username,

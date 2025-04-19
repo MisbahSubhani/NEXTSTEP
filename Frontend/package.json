@@ -1,13 +1,13 @@
 {
   "name": "intern",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -21,7 +21,6 @@
     "fetch": "^1.1.0",
     "flowbite-react": "^0.10.2",
     "gsap": "^3.12.7",
-    "intern": "file:",
     "link": "^2.1.1",
     "lucide-react": "^0.487.0",
     "papaparse": "^5.5.2",
@@ -52,7 +51,6 @@
     "tailwindcss": "^3.4.17",
     "vite": "^6.0.5"
   },
-  "module": "index.ts",
   "peerDependencies": {
     "typescript": "^5.0.0"
   }

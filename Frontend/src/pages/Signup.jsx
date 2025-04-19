@@ -18,7 +18,7 @@ export function SignUp() {
     setLoading(true); // Start loader!
   
     try {
-      const response = await axios.post(`http://${backendUrl}/student/signup`, {
+      const response = await axios.post(`https://${backendUrl}/student/signup`, {
         name,
         email,
         username,

@@ -16,7 +16,7 @@ const ApplicationDetails = () => {
   const getInternships = async () => {
     const token = localStorage.getItem("authorization");
     try {
-      const response = await axios.get(`http://${backendUrl}/hr/internships`, {
+      const response = await axios.get(`https://${backendUrl}/hr/internships`, {
         headers: { authorization: token },
       });
       setInternships(response.data.internships || []);
@@ -46,7 +46,7 @@ const cappedPercentage = Math.min(rawPercentage, 100);
           setError(null); // Reset any previous errors
 
           // Fetch data from the backend using Axios
-          const response = await axios.get(`http://${backendUrl}/hr/avgsalary`, {
+          const response = await axios.get(`https://${backendUrl}/hr/avgsalary`, {
             headers: {
               'Authorization': token, // Assuming JWT token is stored in localStorage
             },
@@ -90,7 +90,7 @@ const cappedPercentage = Math.min(rawPercentage, 100);
         return;
       }
 
-      await axios.put(`http://${backendUrl}/application/${appId}`, {
+      await axios.put(`https://${backendUrl}/application/${appId}`, {
         status: newStatus,
       }, {
         headers: { authorization: token }
@@ -113,7 +113,7 @@ const cappedPercentage = Math.min(rawPercentage, 100);
     const fetchApplications = async () => {
       const token = localStorage.getItem("authorization");
       try {
-        const response = await axios.get(`http://${backendUrl}/hr/internships`, {
+        const response = await axios.get(`https://${backendUrl}/hr/internships`, {
           headers: { authorization: token },
         });
 

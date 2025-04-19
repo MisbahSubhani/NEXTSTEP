@@ -116,7 +116,7 @@ export function EditInternship() {
       }
 
       await axios.put(
-        `http://${backendUrl}/hr/internship/${id}`,
+        `https://${backendUrl}/hr/internship/${id}`,
         updatedInternship,
         {
           headers: { Authorization: token },
