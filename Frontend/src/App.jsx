@@ -13,7 +13,8 @@ import { DashboardNav } from "./Components/DashboardNav";
 import { Dashboard } from "./pages/Dashboard";
 import { HrDashboard } from "./pages/HrDashboard";
 import { EditInternship } from "./pages/EditInternship";
-
+import { SpeedInsights } from "@vercel/speed-insights/react"
+import { Analytics } from "@vercel/analytics/react"
 
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
           <Route path="/HR/PostInternship" element={<PostInternship />} />
           <Route path="/HR/EditInternship/:id" element={<EditInternship />} />
           <Route path="/HR/Login" element={<HRLogin />} />
-       
+          <SpeedInsights/>
+          <Analytics/>
           <Route path="/HR/HrDashboard" element={<HrDashboard />} />
     
           
