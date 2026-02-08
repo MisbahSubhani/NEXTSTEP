@@ -21,7 +21,7 @@ export function NoticesList() {
   useEffect(() => {
     const fetchNotices = async () => {
       try {
-        const response = await axios.get(`http://${backendUrl}/notice/all`);
+        const response = await axios.get(`https://${backendUrl}/notice/all`);
         setNotices(response.data);
       } catch (error) {
         console.error("Error fetching notices:", error);
