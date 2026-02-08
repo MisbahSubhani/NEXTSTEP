@@ -62,7 +62,7 @@ export const PostInternship = () => {
       await new Promise(resolve => setTimeout(resolve, 2000));
 
       const response = await axios.post(
-        `http://${backendUrl}/hr/postInternship`,
+        `https://${backendUrl}/hr/postInternship`,
         formData,
         { headers: { Authorization: token } }
       );
